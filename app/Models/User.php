@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -41,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function favorites() : HasMany
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    public function books() : HasMany
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    public function covers() : BelongsToMany
+    {
+        return $this->belongsToMany(Cover::class);
+    }
 }
