@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cover_id')->constrained();
+            $table->foreignId('book_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
