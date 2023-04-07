@@ -11,6 +11,14 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "title",
+        "description",
+        "is_private",
+        "cover_id",
+        "user_id"
+    ];
+
     public function records() : HasMany
     {
         return $this->hasMany(Record::class);
