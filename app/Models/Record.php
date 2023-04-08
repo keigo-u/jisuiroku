@@ -11,6 +11,10 @@ class Record extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'recorded_at'
+    ];
+
     public function book() : BelongsTo
     {
         return $this->belongsTo(Book::class);

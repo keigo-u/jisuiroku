@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -17,6 +18,19 @@ class BookController extends Controller
     public function index() : Collection
     {
         return Book::all();
+    }
+
+    /**
+     * Bookの詳細(Recordの一覧)
+     *
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function show(string $id)
+    {
+        $book = Book::with('records')->findOrFail($id);
+
+        return $book;
     }
 
     /**
