@@ -18,6 +18,10 @@ class Book extends Model
         "cover_id",
         "user_id"
     ];
+    
+    protected $casts = [
+        "is_private" => 'bool'
+    ];
 
     public function records() : HasMany
     {
