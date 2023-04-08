@@ -63,9 +63,9 @@ class BookController extends Controller
      * Bookの削除
      *
      * @param Book $book
-     * @return void
+     * @return JsonResponse
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book) : JsonResponse
     {
         return $book->delete() ? response()->json($book) : response()->json([], 500);
     }

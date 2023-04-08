@@ -70,4 +70,24 @@ class RecordTest extends TestCase
         $response->assertOK()
             ->assertJsonFragment($record->toArray());
     }
+
+    /**
+     * @test
+     */
+    public function 削除することができる(): void
+    {
+        $this->seed([
+            UserSeeder::class,
+            BookSeeder::class,
+            RecordSeeder::class
+        ]);
+
+        $records = Record::where('book_id', 1)->get();
+
+        $response = $this->deleteJson("api/books/1/1");
+        $response->assertOK();
+
+        $response = $this->getJson('api/books/1');
+        $response->assertJsonCount($records->count() - 1);
+    }
 }

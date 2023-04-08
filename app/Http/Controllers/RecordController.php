@@ -56,10 +56,13 @@ class RecordController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Record削除
+     *
+     * @param Record $record
+     * @return JsonResponse
      */
-    public function destroy(string $id)
+    public function destroy(Book $book, Record $record) : JsonResponse
     {
-        //
+        return $record->delete() ? response()->json($record) : response()->json([], 500);
     }
 }
