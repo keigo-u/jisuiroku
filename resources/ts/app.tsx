@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 
 const App = () => {
     const title: string = "Laravel 10 Vite with TypeScript React !!";
-    return <h1>{title}</h1>;
+    return <div className="text-center text-2xl">{title}</div>;
 };
 const container = document.getElementById('app') as HTMLInputElement;
 const root = createRoot(container);
