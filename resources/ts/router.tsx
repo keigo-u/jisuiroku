@@ -1,27 +1,22 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sidebar from "./sidebar";
 
 const Router = () => {
     return (
         <BrowserRouter>
-            <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
-            <li>
-                <Link to="/dashboard">Dashboard</Link>
-            </li>
-            </ul>
-
-        <hr />
-            <Routes>
-                <Route path={`/`} element={<Home />} /> 
-                <Route path={`/about`} element={<About />} />
-                <Route path={`/dashboard`} element={<Dashboard />} />
-            </Routes>
+            <div className="bg-gray-50 dark:bg-slate-900">
+                <Sidebar />
+                
+                {/* Main Content */}
+                <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
+                    <Routes>
+                        <Route path={`/`} element={<Home />} /> 
+                        <Route path={`/share`} element={<About />} />
+                        <Route path={`/mypage`} element={<Dashboard />} />
+                    </Routes>
+                </div>
+            </div>
         </BrowserRouter>
     );
 };

@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "preline": "^1.7.0",
         "react-router-dom": "^6.10.0"
     }
 }
