@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@tanstack/react-query": "^4.29.1",
         "preline": "^1.7.0",
         "react-router-dom": "^6.10.0"
     }

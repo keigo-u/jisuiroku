@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "./sidebar";
+import Sidebar from "./components/sidebar";
+import HomePage from "./pages/home/Home";
 
 const Router = () => {
     return (
@@ -11,7 +12,7 @@ const Router = () => {
                 {/* Main Content */}
                 <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
                     <Routes>
-                        <Route path={`/`} element={<Home />} /> 
+                        <Route path={`/`} element={<HomePage />} /> 
                         <Route path={`/share`} element={<About />} />
                         <Route path={`/mypage`} element={<Dashboard />} />
                     </Routes>
@@ -20,12 +21,6 @@ const Router = () => {
         </BrowserRouter>
     );
 };
-
-function Home() {
-    return(
-        <div className="text-2xl">Home</div>
-    );
-}
 
 function About() {
     return(
