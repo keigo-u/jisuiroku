@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as api from "../api/BookAPI";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 const useBooks = () => {
     return useQuery(['books'], api.getBooks);
@@ -11,10 +13,18 @@ const useCreateBook = () => {
     return useMutation(api.createBook, {
         onSuccess: () => {
             queryClient.invalidateQueries(['books'])
-            console.log('登録に成功しました。')
+            toast.success('新規作成に成功しました。')
         },
-        onError: () => {
-            console.log('登録に失敗しました。')
+        onError: (error: AxiosError) => {
+            if (error.response?.data.errors) {
+                Object.values(error.response?.data.errors).map(
+                    (messages: string[]) => {
+                        messages.map((message: string) => {
+                            toast.error(message)
+                        })
+                    }
+                )
+            }
         }
     })
 }
