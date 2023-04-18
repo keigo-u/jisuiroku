@@ -19,7 +19,7 @@ class RecordController extends Controller
     public function index(Book $book) : Collection
     {
         $records = Record::with(['recipes', 'images'])->where('book_id', $book->id)->get();
-
+        
         return $records;
     }
 

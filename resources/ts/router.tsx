@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import HomePage from "./pages/home/Home";
+import DetailPage from "./pages/detail/Detail";
 
 const Router = () => {
     return (
@@ -13,6 +14,7 @@ const Router = () => {
                 <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
                     <Routes>
                         <Route path={`/`} element={<HomePage />} /> 
+                        <Route path={`/detail`} element={<DetailPage />} />
                         <Route path={`/share`} element={<About />} />
                         <Route path={`/mypage`} element={<Dashboard />} />
                     </Routes>

@@ -17,20 +17,7 @@ class BookController extends Controller
      */
     public function index() : Collection
     {
-        return Book::all();
-    }
-
-    /**
-     * Bookの詳細(Recordの一覧)
-     *
-     * @param string $id
-     * @return JsonResponse
-     */
-    public function show(string $id)
-    {
-        $book = Book::with('records')->findOrFail($id);
-
-        return $book;
+        return Book::with('user')->get();
     }
 
     /**
