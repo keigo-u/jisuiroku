@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Recipe;
 use App\Models\Record;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -36,7 +37,25 @@ class RecordController extends Controller
         $record->fill($request->all());
         $record->book_id = $book->id;
         $record->save();
-        
+        if (isset($request->recipes)) {
+            foreach ($request->recipes as $input_recipe) {
+                $recipe = new Recipe();
+                $recipe->name = $input_recipe['name'];
+                $recipe->detail = $input_recipe['detail'];
+                $recipe->record_id = $record->id;
+                $recipe->save();
+            }
+        }
+
+        if (isset($request->images)) {
+            foreach ($request->images as $input_image) {
+                $image = new Image();
+                $image->image_path = $input_image['image_path'];
+                $image->record_id = $record->id;
+                $image->save();
+            }
+        }
+
         return $record ? response()->json($record, 201) : response()->json([], 500);
     }
 

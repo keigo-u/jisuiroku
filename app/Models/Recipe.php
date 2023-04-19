@@ -10,6 +10,12 @@ class Recipe extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'detail',
+        'record_id',
+    ];
+
     public function record() : BelongsTo
     {
         return $this->belongsTo(Record::class);

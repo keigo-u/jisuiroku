@@ -10,6 +10,11 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'image_path',
+        'record_id',
+    ];
+
     public function record() : BelongsTo
     {
         return $this->belongsTo(Record::class);

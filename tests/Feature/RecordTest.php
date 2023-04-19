@@ -41,7 +41,40 @@ class RecordTest extends TestCase
         ]);
 
         $data = [
-            'recorded_at' => '2023-04-08'
+            'recorded_at' => '2023-04-08',
+        ];
+
+        $response = $this->postJson('api/books/1', $data);
+        dd($response->json());
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function レシピ込みで登録ができる(): void
+    {
+        $this->seed([
+            UserSeeder::class,
+            BookSeeder::class,
+            RecordSeeder::class
+        ]);
+
+        $recipes = [
+            [
+                'name' => 'ぶり大根',
+                'detail' => '砂糖大さじ1、塩小さじ1/2'
+            ],
+            [
+                'name' => 'チャーハン',
+                'detail' => '酒1カップ、みりん大さじ3'
+            ],
+        ];
+
+        $data = [
+            'recorded_at' => '2023-04-08',
+            'recipes' => $recipes,
         ];
 
         $response = $this->postJson('api/books/1', $data);
