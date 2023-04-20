@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
-import { Record } from "../../types/Record";
+import { useLocation } from "react-router-dom";
 import { useRecords } from "../../queries/RecordQuery";
-import { Book } from "../../types/Book";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const DetailPage: React.FC = () => {
 
@@ -35,11 +37,15 @@ const DetailPage: React.FC = () => {
         return (
             <>
             <div>{new Date(record.recorded_at).toLocaleDateString()}</div>
+            <Swiper navigation={true} modules={[Navigation, Pagination]}>
             {record.images?.length != 0 && record.images?.map((image) => (
+                <SwiperSlide>
                 <div>
                     <img src={image.path} />
                 </div>
+                </SwiperSlide>
             ))}
+            </Swiper>
             {record.recipes?.length != 0 && record.recipes?.map((recipe, index) => (
                 <div>
                     <div>料理{index+1}</div>
