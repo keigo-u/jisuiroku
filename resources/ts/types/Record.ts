@@ -10,12 +10,13 @@ export type Record = {
 
 type Image = {
     id: number
-    image_path: string
+    path: string
     record_id: number
 }
 
 type Recipe = {
     id: number
+    name: string
     detail: string
     record_id: number
 }

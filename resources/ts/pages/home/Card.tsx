@@ -13,7 +13,7 @@ const Card: React.FC<Props> = ({ book }) => {
                 {book.title}
             </h3>
             <div className="mt-1 font-medium uppercase text-gray-500 dark:text-gray-500">
-                {book.user?.name}
+                {book.user!.name}
             </div>
             <div className="mt-1 font-medium uppercase text-gray-500 dark:text-gray-500">
                 {new Date(book.created_at!).toLocaleDateString()}
