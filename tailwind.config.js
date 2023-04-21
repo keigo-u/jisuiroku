@@ -7,7 +7,11 @@ module.exports = {
     'node_modules/preline/dist/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '95%': '95%'
+      }
+    },
   },
   plugins: [
     require('preline/plugin'),
