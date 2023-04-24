@@ -15,7 +15,6 @@ const FormModal: React.FC = () => {
             is_private: is_private
         }
         e.preventDefault();
-        console.log('pushed')
         createBook.mutate(inputBook);
         setTitle('');
         setDescription('');

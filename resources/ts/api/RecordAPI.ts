@@ -6,6 +6,19 @@ const getRecords = async (id: number) => {
     return data
 }
 
+const createRecord = async (input) => {
+    const recordJson = input.get('record') as string
+    const recordObj = JSON.parse(recordJson)
+    const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+    const { data } = await axios.post(`api/books/${recordObj.book_id}`, input, config)
+    return data
+}
+
 export {
-    getRecords
+    getRecords,
+    createRecord
 }

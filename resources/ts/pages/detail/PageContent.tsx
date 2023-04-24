@@ -11,12 +11,9 @@ type Props = {
     page: number
     book: Book
     records: Record[]
-    prevPage: () => void
-    nextPage: () => void
-    returnTop: () => void
 }
 
-export const PageContent: React.FC<Props> = ({ page, records, prevPage, nextPage, returnTop }) => {
+export const PageContent: React.FC<Props> = ({ page, records }) => {
     const record = records[page-1]
     return (
         <>

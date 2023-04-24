@@ -15,11 +15,11 @@ class ImageSeeder extends Seeder
     {
         DB::table('images')->insert([
             [
-                'path' => asset('images/sample1.jpg'),
+                'path' => asset('storage/images/sample1.jpg'),
                 'record_id' => 1
             ],
             [
-                'path' => asset('images/sample2.jpg'),
+                'path' => asset('storage/images/sample2.jpg'),
                 'record_id' => 1
             ]
         ]);

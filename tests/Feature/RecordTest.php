@@ -8,6 +8,7 @@ use Database\Seeders\RecordSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
 
 class RecordTest extends TestCase
 {
@@ -47,7 +48,8 @@ class RecordTest extends TestCase
         $response = $this->postJson('api/books/1', $data);
         dd($response->json());
 
-        $response->assertStatus(200);
+        $response->assertCreated()
+        ->assertJsonFragment($data);
     }
 
     /**
@@ -78,9 +80,45 @@ class RecordTest extends TestCase
         ];
 
         $response = $this->postJson('api/books/1', $data);
-        dd($response->json());
 
-        $response->assertStatus(200);
+        $response->assertCreated();
+    }
+
+    /**
+     * @test
+     */
+    public function 画像込みで登録ができる(): void
+    {
+        $this->seed([
+            UserSeeder::class,
+            BookSeeder::class,
+            RecordSeeder::class
+        ]);
+
+        $recipes = [
+            [
+                'name' => 'ぶり大根',
+                'detail' => '砂糖大さじ1、塩小さじ1/2'
+            ],
+            [
+                'name' => 'チャーハン',
+                'detail' => '酒1カップ、みりん大さじ3'
+            ],
+        ];
+
+        $image1 = UploadedFile::fake()->image('test1.jpg');
+        $image2 = UploadedFile::fake()->image('test2.jpg');
+        $images = [$image1, $image2];
+        
+        $data = [
+            'recorded_at' => '2023-04-08',
+            'recipes' => $recipes,
+            'images' => $images
+        ];
+
+        $response = $this->postJson('api/books/1', $data);
+
+        $response->assertCreated();
     }
 
     /**

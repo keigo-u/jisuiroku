@@ -5,10 +5,9 @@ import { Record } from "../../types/Record";
 type Props = {
     book: Book
     records: Record[]
-    nextPage: () => void
 }
 
-export const FrontCover: React.FC<Props> = ({ book, records, nextPage }) => {
+export const FrontCover: React.FC<Props> = ({ book, records }) => {
     
     return (
         <>

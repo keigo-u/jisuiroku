@@ -12,6 +12,7 @@ class Record extends Model
     use HasFactory;
 
     protected $fillable = [
+        'book_id',
         'recorded_at'
     ];
 

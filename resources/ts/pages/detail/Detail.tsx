@@ -4,13 +4,11 @@ import { useRecords } from "../../queries/RecordQuery";
 import { FrontCover } from "./FrontCover";
 import { PageContent } from "./PageContent";
 import { NaviButton } from "./NaviButton";
+import { CreateRecord } from "./CreateRecord";
 
 const DetailPage: React.FC = () => {
 
     const [page, setPage] = useState<number>(0)
-    const nextPage = () => {setPage((prevNum) => prevNum + 1)}
-    const prevPage = () => {setPage((prevNum) => prevNum - 1)}
-    const returnTop = () => {setPage(0)}
     const { state: { book } } = useLocation()
     const { data:records, status } = useRecords(book.id)
 
@@ -23,10 +21,16 @@ const DetailPage: React.FC = () => {
     return (
         <>
         <div className="w-4/5 h-95% mb-10 p-12 mx-auto border rounded-l-lg drop-shadow-lg bg-white text-center overflow-scroll">
-            {page == 0
-            ? <FrontCover book={book} records={records} nextPage={nextPage} />
-            : <PageContent page={page} book={book} records={records} prevPage={prevPage} nextPage={nextPage} returnTop={returnTop} />}
-            <NaviButton page={page} pageLength={records.length} prev={prevPage} next={nextPage} top={returnTop} />
+            {(()=>{
+                if (page == 0) {
+                    return <FrontCover book={book} records={records}/>
+                } else if (page == -1) {
+                    return <CreateRecord book={book}/>
+                } else {
+                    return <PageContent page={page} book={book} records={records} />
+                }
+            })()}
+            {page != -1 && <NaviButton page={page} pageLength={records.length} setState={setPage}/>}
         </div>
         </>
     )
