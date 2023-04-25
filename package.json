@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@tabler/icons-react": "^2.17.0",
         "@tanstack/react-query": "^4.29.1",
         "@types/react-router-dom": "^5.3.3",
         "@types/swiper": "^6.0.0",

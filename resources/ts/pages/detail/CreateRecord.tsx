@@ -5,9 +5,10 @@ import { useCreateRecord } from "../../queries/RecordQuery";
 
 type Props = {
     book: Book
+    setState: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const CreateRecord: React.FC<Props> = ({ book }) => {
+export const CreateRecord: React.FC<Props> = ({ book, setState }) => {
 
     const createRecord = useCreateRecord()
 
@@ -105,9 +106,14 @@ export const CreateRecord: React.FC<Props> = ({ book }) => {
                         料理を減らす
                     </button>
                 </div>
-                <div className="m-8">
+                <div className="mt-8 mb-2">
                     <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                    記録する
+                        記録する
+                    </button>
+                </div>
+                <div className="mb-8">
+                    <button type="button" onClick={() => setState(0)} className="w-full py-1 px-1 inline-flex justify-center items-center gap-2 rounded-md border border-gray-300 border-transparent font-semibold bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400">
+                        キャンセル
                     </button>
                 </div>
             </form>

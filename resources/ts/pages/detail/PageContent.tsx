@@ -22,8 +22,8 @@ export const PageContent: React.FC<Props> = ({ page, records }) => {
         <Swiper navigation={true} pagination={true} modules={[Navigation, Pagination]}>
         {record.images?.length != 0 && record.images?.map((image, index) => (
             <SwiperSlide key={index}>
-            <div  className="my-2 rounded text-center">
-                <img src={image.path}/>
+            <div  className="my-2 rounded">
+                <img src={image.path} className="mx-auto"/>
             </div>
             </SwiperSlide>
         ))}
