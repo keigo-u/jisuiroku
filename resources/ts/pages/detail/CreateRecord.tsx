@@ -6,12 +6,13 @@ import { useCreateRecord } from "../../queries/RecordQuery";
 type Props = {
     book: Book
     setState: React.Dispatch<React.SetStateAction<number>>
+    pageLength: number
 }
 
-export const CreateRecord: React.FC<Props> = ({ book, setState }) => {
+export const CreateRecord: React.FC<Props> = ({ book, setState, pageLength }) => {
 
     const createRecord = useCreateRecord()
-
+    const beforePageLength = pageLength
     const [count, setCount] = useState<number>(1);
     const [inputTitle, setInputTitle] = useState('');
     const [inputDetail, setInputDetail] = useState('');
@@ -64,8 +65,20 @@ export const CreateRecord: React.FC<Props> = ({ book, setState }) => {
         const inputJson = JSON.stringify(inputRecord)
         data.append('record', inputJson)
 
-        // console.log(data.get('images[1]'))
+        // console.log(typeof(data.get('record')))
         createRecord.mutate(data)
+    }
+
+    if (createRecord.isLoading) {
+        return (
+            <div>
+                作成中...
+            </div>
+        )
+    }
+
+    if (createRecord.isSuccess) {
+        setState(0)
     }
 
     return (

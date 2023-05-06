@@ -14,11 +14,15 @@ export const NaviButton: React.FC<Props> = ({ page, pageLength, setState }) => {
     return (
         <>
             <div className="mt-16 mb-0">
-                {page < pageLength && pageLength != 0 && <button onClick={nextPage} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">めくる</button>}
-                {page >= pageLength && pageLength != 0 && <button onClick={returnTop} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">表紙に戻る</button>}
-                {page == 0 || page >= pageLength
-                    ? <button onClick={createRecord} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">記録する</button>
-                    : <button onClick={prevPage} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">もどる</button>}
+                <div>
+                    {page < pageLength && pageLength != 0 && <button onClick={nextPage} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">めくる</button>}
+                    {page <= pageLength && page != 0 && pageLength != 0 && <div className="m-5 py-3 inline-flex justify-center items-center font-semibold text-gray-500">{page}ページ/{pageLength}ページ中</div>}
+                    {page != 0 && pageLength != 0 && <button onClick={prevPage} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">もどる</button>}
+                </div>
+                <div>
+                {page != 0 && pageLength != 0 && <button onClick={returnTop} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">表紙に戻る</button>}
+                {(page == 0 || page >= pageLength) && <button onClick={createRecord} className="m-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:ring-offset-gray-800">記録する</button>}
+                </div>
 
             </div>
         </>

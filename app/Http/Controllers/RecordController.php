@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecordRequest;
 use App\Models\Book;
 use App\Models\Recipe;
 use App\Models\Record;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Validator;
 
 class RecordController extends Controller
 {
@@ -35,8 +37,19 @@ class RecordController extends Controller
      */
     public function store(Book $book, Request $request) : JsonResponse
     {
+        // バリデーションルールの設定
+        $rules = [
+            'recorded_at' => 'required',
+
+        ];
+
+        // リクエストからデータを取り出す
         $data = $request->all();
         $input = json_decode($data['record'], true);
+
+        // バリデーションチェック
+        Validator::make($input, $rules)->validate();
+
         $record = new Record();
         $record->fill($input)->save();
         

@@ -7,7 +7,7 @@ const getRecords = async (id: number) => {
 }
 
 const createRecord = async (input) => {
-    const recordJson = input.get('record') as string
+    const recordJson = input.get('record')
     const recordObj = JSON.parse(recordJson)
     const config = {
         headers: {

@@ -24,6 +24,8 @@ const useCreateBook = () => {
                         })
                     }
                 )
+            } else {
+                toast.error('記録に失敗しました。')
             }
         }
     })

@@ -155,7 +155,8 @@ return [
 
     'attributes' => [
         'title' => 'タイトル',
-        'description' => '説明文'
+        'description' => '説明文',
+        'recorded_at' => '日時'
     ],
 
 ];

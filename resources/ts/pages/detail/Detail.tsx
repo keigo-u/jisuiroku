@@ -26,17 +26,17 @@ const DetailPage: React.FC = () => {
         戻る
         <IconArrowBack />
         </button>
-        <div className="w-4/5 h-95% mb-10 p-12 mx-auto border rounded-l-lg drop-shadow-lg bg-white text-center overflow-scroll">
+        <div className="w-4/5 h-95% mb-10 p-12 mx-auto border rounded-l-2xl drop-shadow-lg bg-white text-center overflow-scroll">
             {(()=>{
                 if (page == 0) {
-                    return <FrontCover book={book} records={records}/>
+                    return <FrontCover book={book} records={records} />
                 } else if (page == -1) {
-                    return <CreateRecord book={book} setState={setPage}/>
+                    return <CreateRecord book={book} setState={setPage} pageLength={records.length} />
                 } else {
                     return <PageContent page={page} book={book} records={records} />
                 }
             })()}
-            {page != -1 && <NaviButton page={page} pageLength={records.length} setState={setPage}/>}
+            {page != -1 && <NaviButton page={page} pageLength={records.length} setState={setPage} />}
         </div>
         </>
     )
