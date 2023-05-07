@@ -12,7 +12,19 @@ const createBook = async (book: Book) => {
     return data
 }
 
+const updateBook = async (book: Book) => {
+    const { data } = await axios.put<Book>(`api/books/${book.id}`, book)
+    return data
+}
+
+const deleteBook = async (id: number) => {
+    const { data } = await axios.delete<Book>(`api/books/${id}`)
+    return data
+}
+
 export {
     getBooks,
-    createBook
+    createBook,
+    updateBook,
+    deleteBook,
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Book } from "../../types/Book";
 import { Link } from "react-router-dom";
+import { IconSettings } from "@tabler/icons-react";
 
 type Props = {
     book: Book
@@ -9,9 +10,12 @@ type Props = {
 const Card: React.FC<Props> = ({ book }) => {
     return (
         <div className="w-40 h-52 m-2 flex flex-col bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-            <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                {book.title}
-            </h3>
+            <div className="flex">
+                <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+                    {book.title}
+                </h3>
+                <button className="ml-auto mr-0 text-slate-400" data-hs-overlay={`#hs-edit-${book.id}-modal`}><IconSettings /></button>
+            </div>
             <div className="mt-1 font-medium uppercase text-gray-500 dark:text-gray-500">
                 {book.user!.name}
             </div>
