@@ -7,6 +7,7 @@ use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -29,8 +30,9 @@ class BookController extends Controller
      */
     public function store(BookRequest $request, Book $book) : JsonResponse
     {
-        $book = Book::create($request->all());
-
+        $book->fill($request->all());
+        $book->user_id = Auth::id();
+        $book->save();
         return $book ? response()->json($book, 201) : response()->json([], 500);
     }
 

@@ -1,8 +1,12 @@
-import React from "react";    
+import React, { useState } from "react";    
 import { Link } from "react-router-dom";
-import { IconHome, IconChalkboard, IconUser, IconMail } from '@tabler/icons-react';
+import { IconHome, IconChalkboard, IconUser, IconMail, IconLogout } from '@tabler/icons-react';
+import { useLogout } from "../queries/AuthQuery";
 
 const Sidebar = () => {
+    const [name, setName] = useState('ホーム')
+    const logout = useLogout()
+
     return (
         <>
         <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
@@ -19,7 +23,7 @@ const Sidebar = () => {
             {/* <!-- Breadcrumb --> */}
             <div className="ml-3 flex items-center whitespace-nowrap min-w-0" aria-label="Breadcrumb">
                 <div className="flex items-center text-sm text-gray-800 dark:text-gray-400">
-                    ホーム
+                    {name}
                 </div>
             </div>
             {/* <!-- End Breadcrumb --> */}
@@ -34,31 +38,37 @@ const Sidebar = () => {
             <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
             <ul className="space-y-1.5">
                 <li>
-                <Link to={`/`} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
+                <Link to={`/home`} onClick={()=>{setName('ホーム')}} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
                     <IconHome className="w-4 h-4"/>
                     ホーム
                 </Link>
                 </li>
 
                 <li>
-                <Link to={`/share`} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
+                <Link to={`/share`} onClick={()=>{setName('みんなの投稿')}} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
                     <IconChalkboard className="w-4 h-4"/>
                     みんなの投稿
                 </Link>
                 </li>
 
                 <li>
-                <Link to={`/mypage`} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
+                <Link to={`/mypage`} onClick={()=>{setName('アカウント')}} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
                     <IconUser className="w-4 h-4"/>
                     アカウント
                 </Link>
                 </li>
 
                 <li>
-                <Link to={`/contact`} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
+                <Link to={`/contact`} onClick={()=>{setName('お問い合わせ')}} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
                     <IconMail className="w-4 h-4"/>
                     お問い合わせ
                 </Link>
+                </li>
+                <li>
+                <div onClick={()=>{logout.mutate()}} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white">
+                    <IconLogout className="w-4 h-4"/>
+                    ログアウト
+                </div>
                 </li>
             </ul>
             </nav>

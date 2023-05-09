@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Book;
+use App\Models\User;
 use Database\Seeders\BookSeeder;
 use Database\Seeders\RecordSeeder;
 use Database\Seeders\UserSeeder;
@@ -12,6 +13,14 @@ use Tests\TestCase;
 class BookTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    }
 
     /**
      * @test

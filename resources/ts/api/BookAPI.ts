@@ -7,7 +7,6 @@ const getBooks = async () => {
 }
 
 const createBook = async (book: Book) => {
-    book['user_id'] = 1;
     const { data } = await axios.post<Book>('api/books', book)
     return data
 }
