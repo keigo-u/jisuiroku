@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLogin } from "../../queries/AuthQuery";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     const login = useLogin()
@@ -20,10 +21,10 @@ const LoginPage = () => {
                 <div className="text-center">
                     <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">ログイン</h1>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Don't have an account yet?
-                    <a className="text-blue-600 decoration-2 hover:underline font-medium" href="../examples/html/signup.html">
-                        Sign up here
-                    </a>
+                    アカウントをお持ちではないですか？
+                    <Link to={`/register`} className="text-blue-600 decoration-2 hover:underline font-medium">
+                        新規作成
+                    </Link>
                     </p>
                 </div>
 
@@ -54,7 +55,7 @@ const LoginPage = () => {
                             </svg>
                             </div>
                         </div>
-                        <p className="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we can get back to you</p>
+                        <p className="hidden text-xs text-red-600 mt-2" id="email-error">有効なメールアドレスを入力してください</p>
                         </div>
                         {/*End Form Group */}
 

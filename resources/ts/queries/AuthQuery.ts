@@ -8,6 +8,30 @@ const useUser = () => {
     return useQuery(['user'], api.getUser);
 }
 
+const useRegister = () => {
+    const { setIsAuth } = useAuth()
+    return useMutation(api.register, {
+        onSuccess: (user) => {
+            if (user) {
+                setIsAuth(true)
+            }
+        },
+        onError: (error: AxiosError) => {
+            if (error.response?.data.errors) {
+                Object.values(error.response?.data.errors).map(
+                    (messages: string[]) => {
+                        messages.map((message: string) => {
+                            toast.error(message)
+                        })
+                    }
+                )
+            } else {
+                toast.error('アカウント作成に失敗しました。')
+            }
+        }
+    })
+}
+
 const useLogin = () => {
     const { setIsAuth } = useAuth()
     return useMutation(api.login, {
@@ -38,6 +62,7 @@ const useLogout = () => {
 
 export {
     useUser,
+    useRegister,
     useLogin,
     useLogout,
 }

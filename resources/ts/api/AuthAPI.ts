@@ -6,6 +6,11 @@ const getUser = async () => {
     return data;
 }
 
+const register = async ({ name, email, password, password_confirmation }: { name: string, email: string, password: string, password_confirmation: string}) => {
+    const { data } = await axios.post<User>('api/register', { name, email, password, password_confirmation })
+    return data
+}
+
 const login = async ({ email, password }: { email: string, password: string }) => {
     const { data } = await axios.post<User>('api/login', { email, password })
     return data
@@ -18,6 +23,7 @@ const logout = async () => {
 
 export {
     getUser,
+    register,
     login,
     logout,
 }

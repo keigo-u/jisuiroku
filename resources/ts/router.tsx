@@ -6,6 +6,7 @@ import HomePage from "./pages/home/Home";
 import DetailPage from "./pages/detail/Detail";
 import { Header } from "./components/Header";
 import LoginPage from "./pages/auth/Login";
+import RegisterPage from "./pages/auth/Register";
 import UsagePage from "./pages/top/Usage";
 import { useAuth } from "./hooks/AuthContext";
 import { useUser } from "./queries/AuthQuery";
@@ -50,6 +51,7 @@ const Router = () => {
                     <Route path={`/`} element={<LoginRoute component={<TopPage />} />} />
                     <Route path={`/usage`} element={<LoginRoute component={<UsagePage />} />} />
                     <Route path={`/login`} element={<LoginRoute component={<LoginPage />} />} />
+                    <Route path={`/register`} element={<LoginRoute component={<RegisterPage />} />} />
 
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/detail`} element={<GuardRoute component={<DetailPage />} />} /> 
