@@ -28,7 +28,7 @@ class RecordSeeder extends Seeder
                 "updated_at" => new DateTime(),
             ],
             [
-                "book_id" => 2,
+                "book_id" => 3,
                 "recorded_at" => "2023-04-02",
                 "created_at" => new DateTime(),
                 "updated_at" => new DateTime(),

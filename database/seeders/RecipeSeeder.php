@@ -23,6 +23,11 @@ class RecipeSeeder extends Seeder
                 'name' => '筍の煮物',
                 'detail' => '醤油多め',
                 'record_id' => 1
+            ],
+            [
+                'name' => 'わかめと豆腐の味噌汁',
+                'detail' => 'わかめは水で戻しておき、沸騰してから豆腐と一緒に加える。',
+                'record_id' => 3
             ]
         ]);
     }

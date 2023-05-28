@@ -6,6 +6,11 @@ const getBooks = async () => {
     return data;
 }
 
+const getAllBooks = async () => {
+    const { data } = await axios.get<Book[]>("/api/books/all");
+    return data;
+}
+
 const createBook = async (book: Book) => {
     const { data } = await axios.post<Book>('api/books', book)
     return data
@@ -23,6 +28,7 @@ const deleteBook = async (id: number) => {
 
 export {
     getBooks,
+    getAllBooks,
     createBook,
     updateBook,
     deleteBook,

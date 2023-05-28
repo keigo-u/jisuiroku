@@ -22,7 +22,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::apiResource("/books", BookController::class)->except(['show']);
+    Route::apiResource('/books', BookController::class)->except(['show']);
+    Route::get('/books/all', [BookController::class, 'all'])->name('books.all');
     
     Route::prefix('/books/{book}')->controller(RecordController::class)->group(function() {
         Route::get('/', 'index')->name('record.index');

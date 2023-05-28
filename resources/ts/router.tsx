@@ -10,6 +10,7 @@ import UsagePage from "./pages/top/Usage";
 import { useAuth } from "./hooks/AuthContext";
 import { useUser } from "./queries/AuthQuery";
 import { NotFoundPage } from "./pages/error/NotFound";
+import SharePage from "./pages/share/Share";
 
 type Props = {
     component: ReactNode
@@ -52,8 +53,8 @@ const Router = () => {
 
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/detail`} element={<GuardRoute component={<DetailPage />} />} /> 
-                    <Route path={`/share`} element={<GuardRoute component={<About />} />} /> 
-                    <Route path={`/mypage`} element={<GuardRoute component={<Dashboard />} />} /> 
+                    <Route path={`/share`} element={<GuardRoute component={<SharePage />} />} /> 
+                    <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} /> 
                     <Route path={`/*`} element={<NotFoundPage />} />
                 </Routes>
                 </div>
@@ -62,15 +63,13 @@ const Router = () => {
     );
 };
 
-function About() {
+const ProfilePage = () => {
+    const { data:authUser } = useUser()
     return(
-        <div className="text-2xl">About</div>
-    );
-}
-
-function Dashboard() {
-    return(
-        <div className="text-2xl">Dashboard</div>
+        <>
+        <div className="text-2xl">マイページ</div>
+        <div>ログイン中のユーザー：{authUser ? authUser.name : ''}</div>
+        </>
     );
 }
 

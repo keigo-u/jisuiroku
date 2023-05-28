@@ -32,7 +32,25 @@ class BookSeeder extends Seeder
                 "is_private" => true,
                 "cover_id" => null,
                 "user_id" => 1,
-            ]
+            ],
+            [
+                "title" => "お味噌汁集",
+                "description" => "いろんな種類の味噌汁",
+                "created_at" => new DateTime(),
+                "updated_at" => new DateTime(),
+                "is_private" => true,
+                "cover_id" => null,
+                "user_id" => 2,
+            ],
+            [
+                "title" => "お味噌汁集2",
+                "description" => "いろんな種類の味噌汁",
+                "created_at" => new DateTime(),
+                "updated_at" => new DateTime(),
+                "is_private" => false,
+                "cover_id" => null,
+                "user_id" => 2,
+            ],
         ]);
     }
 }

@@ -11,14 +11,29 @@ use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:checkUser,book')->only(['update', 'destroy']);
+    }
+
     /**
-     * Book一覧
+     * ユーザーごとのBook一覧
      *
      * @return Collection
      */
     public function index() : Collection
     {
-        return Book::with('user')->get();
+        return Book::where('user_id', Auth::id())->with('user')->get();
+    }
+
+    /**
+     * ログインしているユーザー以外のすべてのBook一覧
+     *
+     * @return Collection
+     */
+    public function all() : Collection
+    {
+        return Book::where([['user_id', '!=', Auth::id()], ['is_private', true]])->with('user')->get();
     }
 
     /**

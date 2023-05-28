@@ -7,6 +7,10 @@ const useBooks = () => {
     return useQuery(['books'], api.getBooks);
 }
 
+const useAllBooks = () => {
+    return useQuery(['allBooks'], api.getAllBooks);
+}
+
 const useCreateBook = () => {
     const queryClient = useQueryClient()
 
@@ -71,6 +75,7 @@ const useDeleteBook = () => {
 
 export {
     useBooks,
+    useAllBooks,
     useCreateBook,
     useUpdateBook,
     useDeleteBook 

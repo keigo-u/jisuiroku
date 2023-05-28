@@ -33,9 +33,26 @@ class BookTest extends TestCase
             RecordSeeder::class
         ]);
 
-        $books = Book::all();
-
+        $books = Book::where('user_id', 1)->with('user')->get();
         $response = $this->getJson('api/books');
+
+        $response->assertOk()
+            ->assertJsonCount($books->count());
+    }
+
+    /**
+     * @test
+     */
+    public function 公開されている一覧を取得することができる(): void
+    {
+        $this->seed([
+            UserSeeder::class,
+            BookSeeder::class,
+            RecordSeeder::class
+        ]);
+
+        $books = Book::where([['user_id', '!=',1], ['is_private', true]])->with('user')->get();
+        $response = $this->getJson('api/books/all');
 
         $response->assertOk()
             ->assertJsonCount($books->count());
