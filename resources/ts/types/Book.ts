@@ -8,6 +8,7 @@ export type Book = {
     created_at?: Date
     updated_at?: Date
     user?: User
+    is_favorite?: boolean
 }
 
 export type User = {

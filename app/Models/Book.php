@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -41,5 +42,10 @@ class Book extends Model
     public function favorites() : HasMany
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function isFavorite() : bool
+    {
+        return $this->favorites()->where('user_id', Auth::id())->exists();
     }
 }

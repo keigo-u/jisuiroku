@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
@@ -33,7 +34,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/{record}', 'destroy')->name('record.destroy');
     });
 
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::apiResource('/favorites', FavoriteController::class)->except(['show', 'update']);
 });

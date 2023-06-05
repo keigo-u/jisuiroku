@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Recipe;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +18,8 @@ class DatabaseSeeder extends Seeder
             BookSeeder::class,
             RecordSeeder::class,
             ImageSeeder::class,
-            RecipeSeeder::class
+            RecipeSeeder::class,
+            FavoriteSeeder::class
         ]);
     }
 }

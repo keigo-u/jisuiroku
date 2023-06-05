@@ -33,7 +33,12 @@ class BookController extends Controller
      */
     public function all() : Collection
     {
-        return Book::where([['user_id', '!=', Auth::id()], ['is_private', true]])->with('user')->get();
+        $books = Book::where([['user_id', '!=', Auth::id()], ['is_private', false]])->with('user')->get();
+        $books->map(function ($book){
+            $book['is_favorite'] = $book->isFavorite();
+            return $book;
+        });
+        return $books;
     }
 
     /**

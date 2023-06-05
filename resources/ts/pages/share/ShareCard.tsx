@@ -1,20 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Book } from "../../types/Book";
 import { Link } from "react-router-dom";
-import { IconSettings } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import { useFavorites, useUnFavorites } from "../../queries/FavoriteQuery";
 
 type Props = {
     book: Book
 }
 
-const Card: React.FC<Props> = ({ book }) => {
+const ShareCard: React.FC<Props> = ({ book }) => {
+    
+    const [isFavorite, setIsFavorite] = useState(book.is_favorite)
+    const favorite = useFavorites()
+    const unFavorite = useUnFavorites()
+    const handleFavorite = (id: number) => {
+        if(isFavorite) {
+            unFavorite.mutate(id)
+            setIsFavorite(false)
+        } else {
+            favorite.mutate(id)
+            setIsFavorite(true)
+        }
+    }
     return (
         <div className="w-40 h-52 m-2 flex flex-col bg-white border shadow-sm rounded-xl p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
             <div className="flex">
                 <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                     {book.title}
                 </h3>
-                <button className="ml-auto mr-0 text-slate-400"><IconSettings /></button>
+                {isFavorite
+                ? <button onClick={() => handleFavorite(book.id!)} className="ml-auto mr-0 text-slate-400"><IconHeartFilled className="text-red-500" /></button>
+                : <button onClick={() => handleFavorite(book.id!)} className="ml-auto mr-0 text-slate-400"><IconHeart /></button>}
             </div>
             <div className="mt-1 font-medium uppercase text-gray-500 dark:text-gray-500">
                 {book.user!.name}
@@ -32,4 +48,4 @@ const Card: React.FC<Props> = ({ book }) => {
     );
 }
 
-export default Card;
+export default ShareCard;
