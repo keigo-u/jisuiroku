@@ -13,7 +13,7 @@ const useFavorites = () => {
     return useMutation(api.favorite, {
         onSuccess: () => {
             queryClient.invalidateQueries(['favorites'])
-            toast.success('お気に入り登録に成功しました。')
+            toast.success('お気に入り登録しました。')
         },
         onError: (error: AxiosError) => {
             toast.error('お気に入り登録に失敗しました。')
@@ -27,7 +27,7 @@ const useUnFavorites = () => {
     return useMutation(api.unFavorite, {
         onSuccess: () => {
             queryClient.invalidateQueries(['favorites'])
-            toast.success('お気に入り解除に成功しました。')
+            toast.success('お気に入り解除しました。')
         },
         onError: (error: AxiosError) => {
             toast.error('お気に入り解除に失敗しました。')
