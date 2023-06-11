@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\LoginController;
@@ -39,4 +40,5 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::apiResource('/favorites', FavoriteController::class)->except(['show', 'update']);
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 });

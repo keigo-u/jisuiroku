@@ -65,7 +65,7 @@ const SharePage = () => {
 
     return (
         <>
-        <div className="text-2xl m-5">みんなの投稿</div>
+        <div className="text-2xl m-5 font-bold">みんなの投稿</div>
 
         <input type="text" id="input-label" value={inputValue} onChange={handleInputChange} className="my-3 py-3 px-4 block border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="絞り込み検索"/>
 

@@ -12,6 +12,7 @@ import { useAuth } from "./hooks/AuthContext";
 import { useUser } from "./queries/AuthQuery";
 import { NotFoundPage } from "./pages/error/NotFound";
 import SharePage from "./pages/share/Share";
+import ContactPage from "./pages/contact/Contact";
 
 type Props = {
     component: ReactNode
@@ -56,7 +57,8 @@ const Router = () => {
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/detail`} element={<GuardRoute component={<DetailPage />} />} /> 
                     <Route path={`/share`} element={<GuardRoute component={<SharePage />} />} /> 
-                    <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} /> 
+                    <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} />
+                    <Route path={`/contact`} element={<GuardRoute component={<ContactPage />} />} /> 
                     <Route path={`/*`} element={<NotFoundPage />} />
                 </Routes>
                 </div>
