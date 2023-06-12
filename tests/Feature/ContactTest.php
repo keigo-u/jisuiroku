@@ -56,4 +56,9 @@ class ContactTest extends TestCase
         $mailable->assertFrom(env('MAIL_FROM_ADDRESS'));
 
     }
+
+    public function test_image_loading(): void
+    {
+        dd(asset('/user.png'));
+    }
 }

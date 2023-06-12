@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
             "name" => "test",
             "email" => "test@test.com",
             "password" => Hash::make("password123"),
-            "icon_path" => null,
             "created_at" => new DateTime(),
             "updated_at" => new DateTime()
         ]);
@@ -27,7 +26,6 @@ class UserSeeder extends Seeder
             "name" => "test2",
             "email" => "test2@test.com",
             "password" => Hash::make("password123"),
-            "icon_path" => null,
             "created_at" => new DateTime(),
             "updated_at" => new DateTime()
         ]);

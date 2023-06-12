@@ -13,6 +13,7 @@ import { useUser } from "./queries/AuthQuery";
 import { NotFoundPage } from "./pages/error/NotFound";
 import SharePage from "./pages/share/Share";
 import ContactPage from "./pages/contact/Contact";
+import { ProfilePage } from "./pages/mypage/ProfilePage";
 
 type Props = {
     component: ReactNode
@@ -66,15 +67,5 @@ const Router = () => {
         </BrowserRouter>
     );
 };
-
-const ProfilePage = () => {
-    const { data:authUser } = useUser()
-    return(
-        <>
-        <div className="text-2xl">マイページ</div>
-        <div>ログイン中のユーザー：{authUser ? authUser.name : ''}</div>
-        </>
-    );
-}
 
 export default Router;
