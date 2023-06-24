@@ -10,6 +10,13 @@ module.exports = {
     extend: {
       spacing: {
         '95%': '95%'
+      },
+      colors: {
+        'beige': '#F9F5ED',
+        'brown': '#D7C0AE'
+      },
+      fontFamily: {
+        NotoSans: ['"Noto Sans JP"']
       }
     },
   },

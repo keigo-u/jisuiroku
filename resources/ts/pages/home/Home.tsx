@@ -6,6 +6,7 @@ import FormModal from "./FormModal";
 import EditModal from "./EditModal";
 import { useFavorites, useGetFavorites } from "../../queries/FavoriteQuery";
 import ShareCard from "../share/ShareCard";
+import { IconPencilPlus } from "@tabler/icons-react";
 
 const HomePage: React.FC = () => {
 
@@ -61,9 +62,10 @@ const TitleBar = () => {
     return (
         <>
         <div className="flex justify-between">
-            <div className="text-2xl m-5 font-bold">自炊録</div>
+            <div className="text-2xl m-5 px-12 py-2 font-bold bg-brown drop-shadow-md rounded font-NotoSans">自炊録</div>
 
-            <button type="button" className="py-1 px-3 ml-3 mb-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
+            <button type="button" className="py-2 px-5 mx-2 my-5 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold drop-shadow-md bg-sky-200 text-gray-600 hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
+                <IconPencilPlus />
                 新規作成
             </button>
         </div>
@@ -75,7 +77,7 @@ const FavoriteField = () => {
 
     const { data:favorites, status:favo_status } = useGetFavorites();
 
-    if (status === 'loading') {
+    if (favo_status === 'loading') {
         return(
             <>
             <div className="text-2xl m-5 mt-10 font-bold">お気に入り</div>
@@ -83,7 +85,7 @@ const FavoriteField = () => {
             <FormModal />
             </>
         )
-    } else if (status === 'error') {
+    } else if (favo_status === 'error') {
         return(
             <>
             <div className="text-2xl m-5 mt-10 font-bold">お気に入り</div>
