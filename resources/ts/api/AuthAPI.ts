@@ -6,6 +6,11 @@ const getUser = async () => {
     return data;
 }
 
+const updateUser = async ({ name, email }: { name: string, email: string }) => {
+    const { data } = await axios.patch<User>('/api/user', { name, email })
+    return data
+}
+
 const register = async ({ name, email, password, password_confirmation }: { name: string, email: string, password: string, password_confirmation: string}) => {
     const { data } = await axios.post<User>('api/register', { name, email, password, password_confirmation })
     return data
@@ -23,6 +28,7 @@ const logout = async () => {
 
 export {
     getUser,
+    updateUser,
     register,
     login,
     logout,

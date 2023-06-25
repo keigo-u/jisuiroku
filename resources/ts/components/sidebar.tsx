@@ -18,7 +18,7 @@ const Sidebar = () => {
 
     return (
         <>
-        <div className="sticky top-0 inset-x-0 z-20 bg-sky-200 border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
+        <div className="sticky top-0 inset-x-0 z-20 bg-skyblue border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center py-4">
             {/* <!-- Navigation Toggle --> */}
             <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@ const Sidebar = () => {
             </div>
         </div>
         {/* <!-- Sidebar --> */}
-        <div id="application-sidebar" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-sky-200 border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 dark:scrollbar-y dark:bg-gray-800 dark:border-gray-700">
+        <div id="application-sidebar" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-skyblue border-r border-gray-200 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 dark:scrollbar-y dark:bg-gray-800 dark:border-gray-700">
             <div className="px-6">
             <a className="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Jisui6</a>
             </div>

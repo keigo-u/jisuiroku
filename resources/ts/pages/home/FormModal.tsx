@@ -22,11 +22,11 @@ const FormModal: React.FC = () => {
     }
 
     return (
-        <div id="hs-form-modal" className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto">
+        <div id="hs-form-modal" className="hs-overlay hidden w-full h-full fixed top-32 left-0 lg:left-32 z-[60] overflow-x-hidden overflow-y-auto">
             <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto">
-                <form id="input_form" onSubmit={handleSubmit} className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-                <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
-                    <h3 className="font-bold text-gray-800 dark:text-white">
+                <form id="input_form" onSubmit={handleSubmit} className="flex flex-col bg-light-beige border shadow-sm rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <div className="flex justify-between items-center my-2 py-3 px-4 dark:border-gray-700">
+                    <h3 className="font-bold text-gray-800 text-xl dark:text-white">
                     新しく本を追加する
                     </h3>
                     <button type="button" className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
@@ -38,23 +38,23 @@ const FormModal: React.FC = () => {
                 </div>
                 <div className="p-4 overflow-y-auto">
                     <label htmlFor="input_title" className="block text-sm font-medium mb-2 dark:text-white">タイトル</label>
-                    <input type="text" id="input_title" value={title} onChange={(e) => setTitle(e.target.value)} className="py-3 px-4 block w-full border rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" autoFocus/>
+                    <input type="text" id="input_title" value={title} onChange={(e) => setTitle(e.target.value)} className="py-3 px-4 block w-full border border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" autoFocus/>
                 </div>
                 <div className="p-4 overflow-y-auto">
                     <label htmlFor="input_description" className="block text-sm font-medium mb-2 dark:text-white">詳細</label>
-                    <input type="text" id="input_description" value={description} onChange={(e) => setDescription(e.target.value)} className="py-3 px-4 block w-full border rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" autoFocus/>
+                    <input type="text" id="input_description" value={description} onChange={(e) => setDescription(e.target.value)} className="py-3 px-4 block w-full border border-gray-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" autoFocus/>
                 </div>
                 <div className="p-4 overflow-y-auto">
                     <label htmlFor="is_private_switch" className="block text-sm font-medium mb-2 dark:text-white">非公開にする</label>
-                    <input data-hs-theme-switch onChange={(e) => setIsPrivate(e.target.checked)} className="relative w-[3.25rem] h-7 bg-gray-100 checked:bg-none checked:bg-blue-600 rounded-full cursor-pointer transition-colors ease-in-out duration-200 border-2 border-transparent ring-1 ring-transparent focus:border-slate-700 focus:ring-slate-700 focus:outline-none appearance-none 
+                    <input data-hs-theme-switch onChange={(e) => setIsPrivate(e.target.checked)} className="relative w-[3.25rem] h-7 bg-gray-100 checked:bg-none checked:bg-gray-600 rounded-full cursor-pointer transition-colors ease-in-out duration-200 border-2 border-transparent ring-1 ring-transparent focus:border-slate-700 focus:ring-slate-700 focus:outline-none appearance-none 
                     before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 
                     after:absolute after:right-1.5 after:top-[calc(50%-0.40625rem)] after:w-[.8125rem] after:h-[.8125rem] after:bg-no-repeat after:bg-[right_center] after:bg-[length:.8125em_.8125em] after:bg-[url('../svg/illustration/moon-stars.svg')] checked:after:bg-[url('../svg/illustration/brightness-high.svg')] after:transform after:transition-all after:ease-in-out after:duration-200 after:opacity-70 checked:after:left-1.5 checked:after:right-auto" type="checkbox" id="is_private_switch"></input>
                 </div>
                 <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
-                    <button type="button" className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
+                    <button type="button" className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-gray-300 text-gray-700 shadow-md align-middle hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
                     閉じる
                     </button>
-                    <button type="submit" className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
+                    <button type="submit" className="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-lg border border-transparent font-semibold bg-beige hover:bg-brown shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-form-modal">
                     保存する
                     </button>
                 </div>

@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function() {
         return $request->user();
     });
 
+    Route::patch('/user', [LoginController::class, 'update'])->name('user.update');
+
     Route::apiResource('/favorites', FavoriteController::class)->except(['show', 'update']);
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
 });

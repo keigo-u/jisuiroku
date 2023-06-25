@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import * as api from "../api/AuthAPI";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -6,6 +6,18 @@ import { useAuth } from "../hooks/AuthContext";
 
 const useUser = () => {
     return useQuery(['user'], api.getUser);
+}
+
+const useUpdateUser = () => {
+    const queryClient = useQueryClient()
+    return useMutation(api.updateUser, {
+        onSuccess: () => {
+            toast.success('更新に成功しました。')
+        },
+        onError: () => {
+            toast.error('更新に失敗しました。')
+        }
+    })
 }
 
 const useRegister = () => {
@@ -62,6 +74,7 @@ const useLogout = () => {
 
 export {
     useUser,
+    useUpdateUser,
     useRegister,
     useLogin,
     useLogout,

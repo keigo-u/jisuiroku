@@ -31,11 +31,11 @@ const EditModal: React.FC<Props> = ({book}) => {
 
     return (
         <>
-        <div id={`hs-edit-${book.id}-modal`} className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto">
+        <div id={`hs-edit-${book.id}-modal`} className="hs-overlay hidden w-full h-full fixed top-32 left-0 lg:left-32 z-[60] overflow-x-hidden overflow-y-auto">
             <div className="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto">
-                <form id="input_form" onSubmit={handleSubmit} className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-                <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
-                    <h3 className="font-bold text-gray-800 dark:text-white">
+                <form id="input_form" onSubmit={handleSubmit} className="flex flex-col bg-light-beige border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <div className="flex justify-between items-center my-2 py-3 px-4 dark:border-gray-700">
+                    <h3 className="font-bold text-gray-800 dark:text-white text-xl">
                     編集する
                     </h3>
                     <button type="button" className="hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-sm dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800" data-hs-overlay={`#hs-edit-${book.id}-modal`}>

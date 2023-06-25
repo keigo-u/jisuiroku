@@ -73,4 +73,9 @@ class LoginController extends Controller
 
         return response()->json(true);
     }
+
+    public function update(Request $request): JsonResponse
+    {
+        return $request->user()->fill($request->all())->save() ? response()->json($request->user()) : response()->json([], 500);
+    }
 }
