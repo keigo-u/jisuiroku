@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
@@ -19,25 +21,25 @@ class BookController extends Controller
     /**
      * ユーザーごとのBook一覧
      *
-     * @return Collection
+     * @return JsonResource
      */
-    public function index() : Collection
+    public function index() : JsonResource
     {
-        return Book::where('user_id', Auth::id())->with('user')->get();
+        return BookResource::collection(Book::where('user_id', Auth::id())->with('user')->get());
     }
 
     /**
      * ログインしているユーザー以外のすべてのBook一覧
      *
-     * @return Collection
+     * @return JsonResource
      */
-    public function all() : Collection
+    public function all() : JsonResource
     {
-        $books = Book::where([['user_id', '!=', Auth::id()], ['is_private', false]])->with('user')->get();
-        $books->map(function ($book){
-            $book['is_favorite'] = $book->isFavorite();
-            return $book;
-        });
+        $books = BookResource::collection(Book::where([['user_id', '!=', Auth::id()], ['is_private', false]])->with('user')->get());
+        // $books->map(function ($book){
+        //     $book['is_favorite'] = $book->isFavorite();
+        //     return $book;
+        // });
         return $books;
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookResource;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +15,13 @@ class FavoriteController extends Controller
     public function index()
     {
         $favorites = Favorite::where('user_id', Auth::id())->get();
-        $books = [];
+        $books = collect();
         foreach($favorites as $favorite) {
             $book = $favorite->book()->with('user')->first();
-            $book['is_favorite'] = $book->isFavorite();
-            array_push($books, $book);
+            $books->push($book);
         }
 
-        return $books;
+        return BookResource::collection($books);
     }
 
     /**

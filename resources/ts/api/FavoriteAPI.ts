@@ -3,7 +3,7 @@ import { Book } from "../types/Book";
 
 const getFavorites = async () => {
     const { data } = await axios.get<Book[]>("/api/favorites");
-    return data;
+    return data['data'];
 }
 
 const favorite = async (id: number) => {

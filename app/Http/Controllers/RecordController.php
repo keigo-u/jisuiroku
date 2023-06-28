@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Validator;
 
 class RecordController extends Controller
@@ -21,9 +22,9 @@ class RecordController extends Controller
      * @param Book $book
      * @return Collection
      */
-    public function index(Book $book) : Collection
+    public function index(Book $book) : LengthAwarePaginator
     {
-        $records = Record::with(['recipes', 'images'])->where('book_id', $book->id)->get();
+        $records = Record::with(['recipes', 'images'])->where('book_id', $book->id)->paginate(1);
         
         return $records;
     }

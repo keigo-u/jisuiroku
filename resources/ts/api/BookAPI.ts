@@ -2,13 +2,13 @@ import axios from "axios";
 import { Book } from "../types/Book";
 
 const getBooks = async () => {
-    const { data } = await axios.get<Book[]>("/api/books");
-    return data;
+    const { data } = await axios.get("/api/books");
+    return data['data'] as Book[];
 }
 
 const getAllBooks = async () => {
-    const { data } = await axios.get<Book[]>("/api/books/all");
-    return data;
+    const { data } = await axios.get("/api/books/all");
+    return data['data'];
 }
 
 const createBook = async (book: Book) => {

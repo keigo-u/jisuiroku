@@ -3,12 +3,11 @@ export type Book = {
     title: string
     description: string
     is_private: boolean
-    user_id?: number
-    cover_id?: number
+    is_favorite?: boolean
     created_at?: Date
     updated_at?: Date
-    user?: User
-    is_favorite?: boolean
+    created_by?: string
+    user_icon?: string
 }
 
 export type User = {

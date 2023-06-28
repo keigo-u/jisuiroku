@@ -19,7 +19,7 @@ const Card: React.FC<Props> = ({ book }) => {
                     {book.title}
                 </h3>
                 <div className="mt-1 font-medium uppercase text-gray-500 dark:text-gray-500">
-                    {book.user!.name}
+                    {book.created_by!}
                 </div>
                 <Link to={"/detail"} state={{book: book}} className="mt-auto mb-0 inline-flex items-center gap-2 text-sm font-medium text-blue-500 hover:text-blue-700">
                     記録を確認する

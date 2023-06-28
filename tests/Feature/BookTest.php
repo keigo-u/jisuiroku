@@ -31,7 +31,7 @@ class BookTest extends TestCase
 
         $books = Book::where('user_id', 1)->with('user')->get();
         $response = $this->getJson('api/books');
-
+        
         $response->assertOk()
             ->assertJsonCount($books->count());
     }

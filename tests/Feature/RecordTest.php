@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Record;
+use App\Models\User;
 use Database\Seeders\BookSeeder;
 use Database\Seeders\RecordSeeder;
 use Database\Seeders\UserSeeder;
@@ -13,6 +14,14 @@ use Illuminate\Http\UploadedFile;
 class RecordTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    }
 
     /**
      * @test
@@ -25,8 +34,8 @@ class RecordTest extends TestCase
             RecordSeeder::class
         ]);
 
-        $response = $this->getJson('api/books/1');
-
+        $response = $this->getJson('api/books/1?page=2');
+        dd($response);
         $response->assertOk();
     }
 
