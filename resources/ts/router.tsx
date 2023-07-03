@@ -14,6 +14,7 @@ import { NotFoundPage } from "./pages/error/NotFound";
 import SharePage from "./pages/share/Share";
 import ContactPage from "./pages/contact/Contact";
 import { ProfilePage } from "./pages/mypage/ProfilePage";
+import BookTopPage from "./pages/book/BookTop";
 
 type Props = {
     component: ReactNode
@@ -56,7 +57,8 @@ const Router = () => {
                     <Route path={`/register`} element={<LoginRoute component={<RegisterPage />} />} />
 
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
-                    <Route path={`/detail`} element={<GuardRoute component={<DetailPage />} />} /> 
+                    <Route path={`/book`} element={<GuardRoute component={<BookTopPage />} />} /> 
+                    <Route path={`/book/detail`} element={<GuardRoute component={<></>} />} /> 
                     <Route path={`/share`} element={<GuardRoute component={<SharePage />} />} /> 
                     <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} />
                     <Route path={`/contact`} element={<GuardRoute component={<ContactPage />} />} /> 
