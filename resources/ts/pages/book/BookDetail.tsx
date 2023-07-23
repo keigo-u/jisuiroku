@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { ReturnButton } from './ReturenButton'
 import { AddButton } from './AddButton'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useRecords } from '../../queries/RecordQuery'
 import { Book } from '../../types/Book'
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 
 import { Slide } from './Slide'
 
@@ -13,11 +14,16 @@ type stateParams  = {
 
 export const BookDetailPage: React.FC = () => {
     
-    const navigate = useNavigate()
     const [page, setPage] = useState<number>(1)
     const { state: { book } }: stateParams = useLocation()
-    const { data:record, status } = useRecords(book.id!, page)
-    console.log(record)
+    const { data, status } = useRecords(book.id!, page)
+    let record
+    let meta
+    if (status === 'success') {
+        record = data['data'][0]
+        meta = data['meta']
+        console.log(meta)
+    }
 
     return (
         <>
@@ -32,6 +38,8 @@ export const BookDetailPage: React.FC = () => {
                     <div className="text-center">読み込み中です。</div>
                 ) : status === 'error' ? (
                     <div className="text-center">データの読み込みに失敗しました。</div> 
+                ) : data['data'].length == 0 ? (
+                    <div className="text-center">記録がありません。</div> 
                 ) : (
                     <div className='w-full h-full'>
                         <div className='m-5 flex'>
@@ -53,6 +61,32 @@ export const BookDetailPage: React.FC = () => {
                 )}
             </div>
         </div>
+        
+        {/* ページネーション */}
+        <div className='flex items-center'>
+            <div className='m-5 mx-auto px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent shadow-md bg-gray-300'>
+                <button className='transition-all text-sm'
+                    onClick={()=>setPage((prev)=>prev-1)}
+                    disabled={page===1}
+                >
+                    <IconChevronLeft />
+                </button>
+                {meta && [...Array(meta['total'])].map((_, index) => (
+                    <button key={index} className={ page==index+1 ? 'p-2 my-0 bg-gray-400 focus:outline-none transition-all text-lg' : 'p-2 hover:bg-gray-400 focus:outline-none transition-all text-lg dark:focus:ring-offset-gray-800'}
+                    onClick={()=>setPage(index+1)}
+                    >
+                        {index+1}
+                    </button>
+                ))}
+                <button className='transition-all text-sm'
+                    onClick={()=>setPage((prev)=>prev+1)}
+                    disabled={meta && page===meta['last_page']}
+                >
+                    <IconChevronRight />
+                </button>
+            </div>
+        </div>
+        
         <AddButton />
         </>
     )

@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
 const useRecords = (id: number, page: number = 1) => {
-    console.log('in query: ', page)
     return useQuery(['records', page], () => api.getRecords(id, page), {
         keepPreviousData: true
     });
