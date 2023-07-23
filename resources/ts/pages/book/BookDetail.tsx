@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { ReturnButton } from './ReturenButton'
 import { AddButton } from './AddButton'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecords } from '../../queries/RecordQuery'
 import { Book } from '../../types/Book'
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconNotes } from '@tabler/icons-react'
 
 import { Slide } from './Slide'
 
@@ -14,6 +14,7 @@ type stateParams  = {
 
 export const BookDetailPage: React.FC = () => {
     
+    const navigate = useNavigate()
     const [page, setPage] = useState<number>(1)
     const { state: { book } }: stateParams = useLocation()
     const { data, status } = useRecords(book.id!, page)
@@ -22,12 +23,17 @@ export const BookDetailPage: React.FC = () => {
     if (status === 'success') {
         record = data['data'][0]
         meta = data['meta']
-        console.log(meta)
     }
 
     return (
         <>
         <ReturnButton />
+        <div className='flex items-center justify-end'>
+            <button className='inline-flex bg-red-300 px-3 py-1 m-1 rounded-full shadow-xl' onClick={()=>navigate('/book', {state: {book: book}})}>
+                <IconNotes className='mr-2'/>
+                閉じる
+            </button>
+        </div>
         <div className='flex flex-col md:flex-row'>
             <div className="flex flex-col items-center justify-center rounded-lg shadow-lg bg-beige mx-auto md:ml-auto md:mr-0 md:my-5 w-[32rem] h-[32rem]">
                 {record && <Slide images={record.images!}/>}
@@ -52,7 +58,7 @@ export const BookDetailPage: React.FC = () => {
                         </div>
                         {record.recipes?.map((recipe, index) => (
                             <div key={index} className='m-4'>
-                                <div>料理{index+1}：</div>
+                                <div>料理{index+1}:</div>
                                 <div className='font-bold ml-3'>{recipe.name}</div>
                                 <div className='ml-3'>{recipe.detail}</div>
                             </div>
@@ -86,7 +92,7 @@ export const BookDetailPage: React.FC = () => {
                 </button>
             </div>
         </div>
-        
+
         <AddButton />
         </>
     )
