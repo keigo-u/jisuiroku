@@ -3,7 +3,6 @@ import { Record } from "../types/Record";
 
 const getRecords = async (id: number, page: number) => {
     const { data }  = await axios.get(`/api/books/${id}?page=${page}`);
-    console.log(data)
     return data
 }
 
