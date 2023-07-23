@@ -3,8 +3,11 @@ import * as api from "../api/RecordAPI"
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
-const useRecords = (id: number) => {
-    return useQuery(['records'], () => api.getRecords(id));
+const useRecords = (id: number, page: number = 1) => {
+    console.log('in query: ', page)
+    return useQuery(['records', page], () => api.getRecords(id, page), {
+        keepPreviousData: true
+    });
 }
 
 const useCreateRecord = () => {

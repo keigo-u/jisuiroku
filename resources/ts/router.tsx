@@ -15,6 +15,7 @@ import SharePage from "./pages/share/Share";
 import ContactPage from "./pages/contact/Contact";
 import { ProfilePage } from "./pages/mypage/ProfilePage";
 import BookTopPage from "./pages/book/BookTop";
+import { BookDetailPage } from "./pages/book/BookDetail";
 
 type Props = {
     component: ReactNode
@@ -58,7 +59,7 @@ const Router = () => {
 
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/book`} element={<GuardRoute component={<BookTopPage />} />} /> 
-                    <Route path={`/book/detail`} element={<GuardRoute component={<></>} />} /> 
+                    <Route path={`/book/detail`} element={<GuardRoute component={<BookDetailPage />} />} /> 
                     <Route path={`/share`} element={<GuardRoute component={<SharePage />} />} /> 
                     <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} />
                     <Route path={`/contact`} element={<GuardRoute component={<ContactPage />} />} /> 

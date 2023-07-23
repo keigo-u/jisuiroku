@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\Record;
 use App\Models\User;
 use Database\Seeders\BookSeeder;
+use Database\Seeders\ImageSeeder;
+use Database\Seeders\RecipeSeeder;
 use Database\Seeders\RecordSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,11 +33,13 @@ class RecordTest extends TestCase
         $this->seed([
             UserSeeder::class,
             BookSeeder::class,
-            RecordSeeder::class
+            RecordSeeder::class,
+            RecipeSeeder::class,
+            ImageSeeder::class
         ]);
 
-        $response = $this->getJson('api/books/1?page=2');
-        dd($response);
+        $response = $this->getJson('api/books/1?page=1');
+        dd($response['data']);
         $response->assertOk();
     }
 

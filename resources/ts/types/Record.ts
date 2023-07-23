@@ -1,17 +1,12 @@
 export type Record = {
     id?: number
-    book_id: number
     recorded_at: string
-    created_at?: string
-    updated_at?: string
-    images?: Image[] | File[]
+    images?: Image[]
     recipes?: Recipe[]
 }
 
-type Image = {
-    id: number
-    path: string
-    record_id: number
+export type Image = {
+    url: string
 }
 
 export type Recipe = {

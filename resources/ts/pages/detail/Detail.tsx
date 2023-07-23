@@ -10,9 +10,10 @@ import { IconArrowBack } from '@tabler/icons-react';
 const DetailPage: React.FC = () => {
 
     const navigate = useNavigate()
-    const [page, setPage] = useState<number>(0)
+    const [page, setPage] = useState<number>(1)
     const { state: { book } } = useLocation()
-    const { data:records, status } = useRecords(book.id)
+    console.log(book)
+    const { data:records, status } = useRecords(book.id, page)
 
     if (status === 'loading') {
         return <div className="text-center">読み込み中です。</div>;
@@ -27,16 +28,15 @@ const DetailPage: React.FC = () => {
         <IconArrowBack />
         </button>
         <div className="w-4/5 h-95% mb-10 p-12 mx-auto border rounded-l-2xl drop-shadow-lg bg-white text-center overflow-scroll">
-            {(()=>{
-                if (page == 0) {
-                    return <FrontCover book={book} records={records} />
-                } else if (page == -1) {
-                    return <CreateRecord book={book} setState={setPage} pageLength={records.length} />
-                } else {
-                    return <PageContent page={page} book={book} records={records} />
-                }
-            })()}
-            {page != -1 && <NaviButton page={page} pageLength={records.length} setState={setPage} />}
+            {records[0].recipes?.length != 0 && records[0].recipes?.map((recipe, index) => (
+                <div key={index} className="text-left">
+                    <div className="text-lg my-2 pl-3 border rounded-lg">料理{index+1}</div>
+                    <div>
+                        <div>料理名：{recipe.name}</div>
+                        <div>レシピもしくはリンク：{recipe.detail}</div>
+                    </div>
+                </div>
+            ))}
         </div>
         </>
     )

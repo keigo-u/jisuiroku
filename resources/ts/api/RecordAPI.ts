@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Record } from "../types/Record";
 
-const getRecords = async (id: number) => {
-    const { data }  = await axios.get<Record[]>(`/api/books/${id}`);
-    return data
+const getRecords = async (id: number, page: number) => {
+    console.log(`/api/books/${id}?page=${page}`)
+    const { data }  = await axios.get<Record[]>(`/api/books/${id}?page=${page}`);
+    return data['data'][0] as Record
 }
 
 const createRecord = async (input) => {
