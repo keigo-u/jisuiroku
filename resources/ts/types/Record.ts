@@ -15,3 +15,10 @@ export type Recipe = {
     detail: string
     record_id?: number
 }
+
+export type RecordInput = {
+    book_id: number
+    recorded_at: string
+    images?: Image[]
+    recipes?: Recipe[]
+}

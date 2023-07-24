@@ -14,7 +14,8 @@ const createRecord = async (input) => {
           'content-type': 'multipart/form-data'
         }
       };
-    const { data } = await axios.post(`api/books/${recordObj.book_id}`, input, config)
+      const url = `/api/books/${recordObj.book_id}`
+    const { data } = await axios.post(url, input, config)
     return data
 }
 

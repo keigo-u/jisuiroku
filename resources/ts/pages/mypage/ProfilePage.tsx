@@ -33,7 +33,7 @@ export const ProfilePage = () => {
                 <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">マイページ</div>
             </div>
             <div className="flex m-10 items-center">
-                <img src={authUser.icon_path} className="w-14 h-14 border rounded-full bg-center"/>
+                <img src={authUser.icon_path} className="w-14 h-14 border rounded-full bg-center bg-gray-200"/>
                 {isEdit ? <input type="text" value={name} onKeyDown={handleKeyDown} onChange={(e)=>setName(e.target.value)} className="py-1 px-4 mx-5 my-auto text-2xl border border-gray-300 rounded-md" /> : <div className="mx-5 my-auto text-2xl">{authUser.name}</div>}
                 {isEdit ? <button onClick={()=>setIsEdit(false)}><IconSquareRoundedX className="w-5 h-5 text-red-500"/></button> : <button onClick={()=>setIsEdit(true)} className="ml-5"><IconEdit className="w-5 h-5"/></button>}
             </div>

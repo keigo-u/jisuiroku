@@ -4,7 +4,7 @@ import { useRecords } from "../../queries/RecordQuery";
 import { FrontCover } from "./FrontCover";
 import { PageContent } from "./PageContent";
 import { NaviButton } from "./NaviButton";
-import { CreateRecord } from "./CreateRecord";
+import { CreateRecord } from "./CreateRecord_old";
 import { IconArrowBack } from '@tabler/icons-react';
 
 const DetailPage: React.FC = () => {

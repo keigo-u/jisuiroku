@@ -14,7 +14,7 @@ const useCreateRecord = () => {
 
     return useMutation(api.createRecord, {
         onSuccess: () => {
-            queryClient.invalidateQueries(['record'])
+            queryClient.invalidateQueries(['records'])
             toast.success('記録に成功しました。')
         },
         onError: (error: AxiosError) => {

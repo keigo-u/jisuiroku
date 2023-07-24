@@ -93,7 +93,7 @@ export const BookDetailPage: React.FC = () => {
             </div>
         </div>
 
-        <AddButton />
+        <AddButton book={book} />
         </>
     )
 }

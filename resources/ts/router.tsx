@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate, RouteProps, RouterProps, Routes
 import TopPage from "./pages/top/Top";
 import Sidebar from "./components/sidebar";
 import HomePage from "./pages/home/Home";
-import DetailPage from "./pages/detail/Detail";
 import { Header } from "./components/Header";
 import LoginPage from "./pages/auth/Login";
 import RegisterPage from "./pages/auth/Register";
@@ -16,6 +15,7 @@ import ContactPage from "./pages/contact/Contact";
 import { ProfilePage } from "./pages/mypage/ProfilePage";
 import BookTopPage from "./pages/book/BookTop";
 import { BookDetailPage } from "./pages/book/BookDetail";
+import { CreateRecordPage } from "./pages/book/CreateRecord";
 
 type Props = {
     component: ReactNode
@@ -60,6 +60,7 @@ const Router = () => {
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/book`} element={<GuardRoute component={<BookTopPage />} />} /> 
                     <Route path={`/book/detail`} element={<GuardRoute component={<BookDetailPage />} />} /> 
+                    <Route path={`/book/detail/create`} element={<GuardRoute component={<CreateRecordPage />} />} />
                     <Route path={`/share`} element={<GuardRoute component={<SharePage />} />} /> 
                     <Route path={`/mypage`} element={<GuardRoute component={<ProfilePage />} />} />
                     <Route path={`/contact`} element={<GuardRoute component={<ContactPage />} />} /> 
