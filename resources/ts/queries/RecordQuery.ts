@@ -57,8 +57,23 @@ const useUpdateRecord = () => {
     })
 }
 
+const useDeleteRecord = () => {
+    const queryClient = useQueryClient()
+
+    return useMutation(api.deleteRecord, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['books'])
+            toast.success('削除に成功しました。')
+        },
+        onError: (error: AxiosError) => {
+            toast.error('削除に失敗しました。')
+        }
+    })
+}
+
 export {
     useRecords,
     useCreateRecord,
-    useUpdateRecord
+    useUpdateRecord,
+    useDeleteRecord
 }

@@ -51,7 +51,7 @@ const Router = () => {
             <div className={ isAuth ? "bg-light-beige dark:bg-slate-900 font-NotoSans" : "h-screen dark:bg-slate-900 bg-gray-100" }>
                 { isAuth ? <Sidebar /> : <Header />}
                 {/* Main Content */}
-                <div className={isAuth ? "w-full h-screen max-h-screen pt-10 px-4 sm:px-6 md:px-8 lg:pl-72" : ""}>
+                <div className={isAuth ? "w-full h-screen pt-10 px-4 sm:px-6 md:px-8 lg:pl-72" : ""}>
                 <Routes>
                     <Route path={`/`} element={<LoginRoute component={<TopPage />} />} />
                     <Route path={`/usage`} element={<LoginRoute component={<UsagePage />} />} />

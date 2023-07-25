@@ -13,8 +13,8 @@ const createRecord = async (input) => {
         headers: {
           'content-type': 'multipart/form-data'
         }
-      };
-      const url = `/api/books/${recordObj.book_id}`
+    };
+    const url = `/api/books/${recordObj.book_id}`
     const { data } = await axios.post(url, input, config)
     return data
 }
@@ -35,8 +35,15 @@ const updateRecord = async (input) => {
     return data
 }
 
+const deleteRecord = async ({book_id, id}: {book_id:number, id: number}) => {
+    const url = `/api/books/${book_id}/${id}`
+    const { data } = await axios.delete<Record>(url)
+    return data
+}
+
 export {
     getRecords,
     createRecord,
-    updateRecord
+    updateRecord,
+    deleteRecord
 }

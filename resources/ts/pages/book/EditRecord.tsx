@@ -1,10 +1,11 @@
 import React, { ChangeEventHandler, useState } from "react"
 import { ReturnButton } from "./ReturenButton"
-import { useUpdateRecord } from "../../queries/RecordQuery"
+import { useDeleteRecord, useUpdateRecord } from "../../queries/RecordQuery"
 import { Recipe, Record, RecordInput } from "../../types/Record"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Book } from "../../types/Book"
 import { IconNotes, IconPencilPlus } from "@tabler/icons-react"
+import { AlertModal } from "../home/AlertModal"
 
 type stateParams  = {
     state: { book: Book, record: Record }
@@ -15,6 +16,7 @@ export const EditRecordPage: React.FC = () => {
     const { state: { book, record } }: stateParams = useLocation()
     const navigate = useNavigate()
     const updateRecord = useUpdateRecord()
+    const deleteRecord = useDeleteRecord()
     const [count, setCount] = useState<number>(record.recipes!.length);
     const [inputTitle, setInputTitle] = useState('');
     const [inputDetail, setInputDetail] = useState('');
@@ -70,7 +72,11 @@ export const EditRecordPage: React.FC = () => {
         updateRecord.mutate(data)
     }
 
-    if(updateRecord.isSuccess) {
+    const handleDelete = () => {
+        deleteRecord.mutate({book_id:book.id!, id: record.id!})
+    }
+
+    if(updateRecord.isSuccess || deleteRecord.isSuccess) {
         navigate('/book/detail', {state: {book: book}})
     }
 
@@ -78,7 +84,7 @@ export const EditRecordPage: React.FC = () => {
         <>
         <ReturnButton />
         <div className="flex flex-col items-center justify-center rounded-lg shadow-lg bg-beige mx-auto md:my-5 w-[32rem]">
-            <div className="font-bold text-2xl mt-5">新しく記録する</div>
+            <div className="font-bold text-2xl mt-5">更新する</div>
             <form onSubmit={handleSubmit} className="w-full text-center" id="record_form">
                 <div className="m-8">
                     <label htmlFor="file-input" className="text-left block text-sm font-medium mb-1 dark:text-white">料理の画像</label>
@@ -126,6 +132,10 @@ export const EditRecordPage: React.FC = () => {
                 更新する
             </button>
         </div>
+        <div className="flex items-center justify-center m-2">
+            <button data-hs-overlay={`#alert-${record.id!}-modal`}>削除する</button> 
+        </div>
+        <AlertModal id={record.id!} handle={handleDelete} />
         </>
     )
 }
