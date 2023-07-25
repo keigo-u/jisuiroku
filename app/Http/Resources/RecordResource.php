@@ -23,7 +23,7 @@ class RecordResource extends JsonResource
 
         return [
             'id' => $record->id,
-            'recorded_at' => $recorded_at->format('Y/m/d H:i'),
+            'recorded_at' => $recorded_at->format('Y/m/d'),
             'images' => ImageResource::collection($record->images),
             'recipes' => RecipeResource::collection($record->recipes)
         ];

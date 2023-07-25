@@ -17,6 +17,7 @@ export type Recipe = {
 }
 
 export type RecordInput = {
+    id?: number
     book_id: number
     recorded_at: string
     images?: Image[]

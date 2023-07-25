@@ -147,10 +147,10 @@ class RecordTest extends TestCase
 
         $record = Record::findOrFail(1);
 
-        $record->title = "書き換えテスト";
-
+        $record->recorded_at = "2022/09/4";
+        
         $response = $this->patchJson("api/books/1/{$record->id}", $record->toArray());
-
+        dd($response);
         $response->assertOK()
             ->assertJsonFragment($record->toArray());
     }

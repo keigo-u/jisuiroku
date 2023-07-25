@@ -4,9 +4,10 @@ import { AddButton } from './AddButton'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecords } from '../../queries/RecordQuery'
 import { Book } from '../../types/Book'
-import { IconChevronLeft, IconChevronRight, IconNotes } from '@tabler/icons-react'
+import { IconChevronLeft, IconChevronRight, IconEdit, IconNotes } from '@tabler/icons-react'
 
 import { Slide } from './Slide'
+import { Link } from 'react-router-dom'
 
 type stateParams  = {
     state: { book: Book }
@@ -93,6 +94,12 @@ export const BookDetailPage: React.FC = () => {
             </div>
         </div>
 
+        <div className=''>
+            <Link to={'/book/detail/edit'} state={{ book: book, record: record }} className='flex'>
+                <IconEdit />
+                編集する
+            </Link>
+        </div>
         <AddButton book={book} />
         </>
     )

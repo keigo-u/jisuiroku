@@ -19,7 +19,24 @@ const createRecord = async (input) => {
     return data
 }
 
+const updateRecord = async (input) => {
+    const recordJson = input.get('record')
+    const recordObj = JSON.parse(recordJson)
+    const config = {
+        method: 'patch',
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+    };
+    const url = `/api/books/${recordObj.book_id}/${recordObj.id}` + '?_method=PATCH'
+    console.log('input', input);
+    console.log('url:',url)
+    const { data } = await axios.post(url, input, config)
+    return data
+}
+
 export {
     getRecords,
-    createRecord
+    createRecord,
+    updateRecord
 }

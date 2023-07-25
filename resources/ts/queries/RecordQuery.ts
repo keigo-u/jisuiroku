@@ -33,7 +33,32 @@ const useCreateRecord = () => {
     })
 }
 
+const useUpdateRecord = () => {
+    const queryClient = useQueryClient()
+
+    return useMutation(api.updateRecord, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['records'])
+            toast.success('更新に成功しました。')
+        },
+        onError: (error: AxiosError) => {
+            if (error.response?.data.errors) {
+                Object.values(error.response?.data.errors).map(
+                    (messages: string[]) => {
+                        messages.map((message: string) => {
+                            toast.error(message)
+                        })
+                    }
+                )
+            } else {
+                toast.error('更新に失敗しました。')
+            }
+        }
+    })
+}
+
 export {
     useRecords,
-    useCreateRecord
+    useCreateRecord,
+    useUpdateRecord
 }

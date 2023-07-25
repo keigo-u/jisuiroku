@@ -47,6 +47,7 @@ class RecordController extends Controller
 
         // リクエストからデータを取り出す
         $data = $request->all();
+        return response()->json($data, 500);
         $input = json_decode($data['record'], true);
 
         // バリデーションチェック
@@ -86,11 +87,39 @@ class RecordController extends Controller
      * @param string $id
      * @return JsonResponse
      */
-    public function update(Book $book, Request $request, string $id) : JsonResponse
+    public function update(Book $book, Record $record, Request $request) : JsonResponse
     {
-        $record = Record::findOrFail($id);
+        // リクエストからデータを取り出す
+        $data = $request->all();
+        $input = json_decode($data['record'], true);
 
-        return $record->update($request->all()) ? response()->json($record) : response()->json([], 500);
+        if (isset($input['recipes'])) {
+            // 一度紐づいているレシピを削除
+            $record->recipes()->delete();
+
+            foreach ($input['recipes'] as $input_recipe) {
+                $recipe = new Recipe();
+                $recipe->name = $input_recipe['name'];
+                $recipe->detail = $input_recipe['detail'];
+                $recipe->record_id = $record->id;
+                $recipe->save();
+            }
+        }
+
+        if (isset($request->images)) {
+            // 一度紐づいている画像を削除
+            $record->images()->delete();
+
+            foreach ($request->images as $input_image) {
+                $image_url = Cloudinary::upload($input_image->getRealPath())->getSecurePath();
+                $image = new Image();
+                $image->path = $image_url;
+                $image->record_id = $record->id;
+                $image->save();
+            }
+        }
+
+        return $record->update($input) ? response()->json($record) : response()->json([], 500);
     }
 
     /**

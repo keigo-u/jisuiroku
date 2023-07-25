@@ -1,26 +1,26 @@
 import React, { ChangeEventHandler, useState } from "react"
 import { ReturnButton } from "./ReturenButton"
-import { useCreateRecord } from "../../queries/RecordQuery"
+import { useUpdateRecord } from "../../queries/RecordQuery"
 import { Recipe, Record, RecordInput } from "../../types/Record"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Book } from "../../types/Book"
 import { IconNotes, IconPencilPlus } from "@tabler/icons-react"
 
 type stateParams  = {
-    state: { book: Book }
+    state: { book: Book, record: Record }
 }
 
-export const CreateRecordPage: React.FC = () => {
+export const EditRecordPage: React.FC = () => {
 
-    const { state: { book } }: stateParams = useLocation()
+    const { state: { book, record } }: stateParams = useLocation()
     const navigate = useNavigate()
-    const createRecord = useCreateRecord()
-    const [count, setCount] = useState<number>(1);
+    const updateRecord = useUpdateRecord()
+    const [count, setCount] = useState<number>(record.recipes!.length);
     const [inputTitle, setInputTitle] = useState('');
     const [inputDetail, setInputDetail] = useState('');
-    const [recipes, setRecipes] = useState<Recipe[]>([{'name': inputTitle, 'detail': inputDetail}])
+    const [date, setDate] = useState<string>(record.recorded_at.split('/').join('-'))
+    const [recipes, setRecipes] = useState<Recipe[]>(record.recipes!)
     const [images, setImages] = useState<File[]>([])
-    const [date, setDate] = useState<string>('')
 
     const handleFiles: ChangeEventHandler<HTMLInputElement> = (e) => {
         const fileList = e.currentTarget.files
@@ -55,6 +55,7 @@ export const CreateRecordPage: React.FC = () => {
         e.preventDefault()
         const data = new FormData();
         const inputRecord: RecordInput = {
+            id: record.id!,
             book_id: book.id!,
             recorded_at: date,
             recipes: recipes,
@@ -66,11 +67,10 @@ export const CreateRecordPage: React.FC = () => {
         
         const inputJson = JSON.stringify(inputRecord)
         data.append('record', inputJson)
-        console.log(data, inputJson)
-        createRecord.mutate(data)
+        updateRecord.mutate(data)
     }
 
-    if(createRecord.isSuccess) {
+    if(updateRecord.isSuccess) {
         navigate('/book/detail', {state: {book: book}})
     }
 
@@ -91,18 +91,18 @@ export const CreateRecordPage: React.FC = () => {
 
                 <div className="m-8">
                     <label htmlFor="input-label" className="text-left block text-sm font-medium mb-1 dark:text-white">日付</label>
-                    <input type="date" id="input-label" onChange={(e) => setDate(e.target.value)} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
+                    <input type="date" id="input-label" defaultValue={record.recorded_at.split('/').join('-')} onChange={(e) => setDate(e.target.value)} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
                 </div>
-                {[...Array(count)].map((_, index) => (
+                {record.recipes?.map((recipe, index) => (
                     <div key={index} className="mx-8">
                         <div className="text-left text-sm font-semibold my-1">料理{index+1}：</div>
                         <div className="my-2">
                             <label htmlFor="input-label" className="text-left block text-sm font-medium mb-1 dark:text-white">料理名</label>
-                            <input type="text" id="input-label" onChange={(e)=>{handleChangeRecipe(index,e.target.value,'name')}} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
+                            <input type="text" id="input-label" defaultValue={recipe.name} onChange={(e)=>{handleChangeRecipe(index,e.target.value,'name')}} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
                         </div>
                         <div className="my-2">
                             <label htmlFor="input-label" className="text-left block text-sm font-medium mb-1 dark:text-white">レシピもしくはリンク</label>
-                            <textarea id="input-label" onChange={(e)=>{handleChangeRecipe(index,e.target.value,'detail')}} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
+                            <textarea id="input-label" defaultValue={recipe.detail} onChange={(e)=>{handleChangeRecipe(index,e.target.value,'detail')}} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" />
                         </div>
                     </div>
                 ))}
@@ -123,7 +123,7 @@ export const CreateRecordPage: React.FC = () => {
             </button>
             <button type="submit" form="record_form" className="m-2 py-2 px-4 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-sky-200 shadow-md hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                 <IconPencilPlus />
-                記録する
+                更新する
             </button>
         </div>
         </>
