@@ -17,7 +17,6 @@ export const EditRecordPage: React.FC = () => {
     const navigate = useNavigate()
     const updateRecord = useUpdateRecord()
     const deleteRecord = useDeleteRecord()
-    const [count, setCount] = useState<number>(record.recipes!.length);
     const [inputTitle, setInputTitle] = useState('');
     const [inputDetail, setInputDetail] = useState('');
     const [date, setDate] = useState<string>(record.recorded_at.split('/').join('-'))
@@ -32,21 +31,26 @@ export const EditRecordPage: React.FC = () => {
         }
     }
     const handleAddRecipe = () => {
-        setCount((prev) => (prev+1))
-
-        const newRecipe: Recipe = {
-            name: inputTitle,
-            detail: inputDetail
-        };
-
-        const newRecipes = [...recipes, newRecipe];
-
-        setRecipes(newRecipes);
+        setRecipes((prestate) => {
+            const _recipes = [...prestate]
+            const newRecipe: Recipe = {
+                name: inputTitle,
+                detail: inputDetail
+            };
+            
+            const newRecipes = [..._recipes, newRecipe];
+            return newRecipes;
+        });
     }
     const handleSubRecipe = () => {
-        count > 1 && setCount((prev) => (prev-1))
-        recipes.pop()
-        setRecipes(recipes)
+        if(record.recipes!.length > 1) {
+            console.log('pushed!')
+            setRecipes((prestate) => {
+                const _recipes = [...prestate]
+                _recipes.pop()
+                return _recipes
+            })
+        }
     }
     const handleChangeRecipe = (index: number, message: string, key: 'name' | 'detail') => {
         const newRecipes = [...recipes];
@@ -99,7 +103,7 @@ export const EditRecordPage: React.FC = () => {
                     <label htmlFor="input-label" className="text-left block text-sm font-medium mb-1 dark:text-white">日付</label>
                     <input type="date" id="input-label" defaultValue={record.recorded_at.split('/').join('-')} onChange={(e) => setDate(e.target.value)} className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"/>
                 </div>
-                {record.recipes?.map((recipe, index) => (
+                {recipes.map((recipe, index) => (
                     <div key={index} className="mx-8">
                         <div className="text-left text-sm font-semibold my-1">料理{index+1}：</div>
                         <div className="my-2">

@@ -8,6 +8,7 @@ import { IconChevronLeft, IconChevronRight, IconEdit, IconNotes } from '@tabler/
 
 import { Slide } from './Slide'
 import { Link } from 'react-router-dom'
+import { useUser } from '../../queries/AuthQuery'
 
 type stateParams  = {
     state: { book: Book }
@@ -16,6 +17,7 @@ type stateParams  = {
 export const BookDetailPage: React.FC = () => {
     
     const navigate = useNavigate()
+    const { data:user } = useUser()
     const [page, setPage] = useState<number>(1)
     const { state: { book } }: stateParams = useLocation()
     const { data, status } = useRecords(book.id!, page)
@@ -94,13 +96,17 @@ export const BookDetailPage: React.FC = () => {
             </div>
         </div>
 
-        <div className=''>
-            <Link to={'/book/detail/edit'} state={{ book: book, record: record }} className='flex'>
-                <IconEdit />
-                編集する
-            </Link>
+        <div className='flex justify-end'>
+            {user && user.name! == book.created_by && 
+            <div className='flex'>
+                <Link to={'/book/detail/edit'} state={{ book: book, record: record }} className='bg-green-200 hover:bg-green-300 rounded-lg shadow-lg ml-auto mr-3 p-5 flex'>
+                    <IconEdit />
+                    編集する
+                </Link>
+            </div>
+            }
+            <AddButton book={book} />
         </div>
-        <AddButton book={book} />
         </>
     )
 }
