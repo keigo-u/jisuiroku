@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useLogin } from "../../queries/AuthQuery";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const LoginPage = () => {
+    const componentName = 'ログイン'
     const login = useLogin()
     const [email, setEmail] = useState('test@test.com')
     const [password, setPassword] = useState('password123')
@@ -14,6 +16,7 @@ const LoginPage = () => {
 
     return (
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <div className="flex h-full items-center py-16">
             <main className="w-full max-w-md mx-auto p-6">
             <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">

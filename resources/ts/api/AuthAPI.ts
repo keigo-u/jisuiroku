@@ -11,6 +11,12 @@ const updateUser = async ({ name, email }: { name: string, email: string }) => {
     return data
 }
 
+const updateUserIcon = async (input) => {
+    const url = '/api/user/icon' + '?_method=PATCH'
+    const { data } = await axios.post(url, input)
+    return data
+} 
+
 const register = async ({ name, email, password, password_confirmation }: { name: string, email: string, password: string, password_confirmation: string}) => {
     const { data } = await axios.post<User>('api/register', { name, email, password, password_confirmation })
     return data
@@ -29,6 +35,7 @@ const logout = async () => {
 export {
     getUser,
     updateUser,
+    updateUserIcon,
     register,
     login,
     logout,

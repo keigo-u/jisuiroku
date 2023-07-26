@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegister } from "../../queries/AuthQuery";
+import { Helmet } from "react-helmet-async";
 
 const RegisterPage = () => {
 
+    const componentName = '新規ユーザー登録'
     const register = useRegister();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -18,6 +20,7 @@ const RegisterPage = () => {
 
     return (
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <div className="dark:bg-slate-900 bg-gray-100 flex h-full items-center py-16">
             <main className="w-full max-w-md mx-auto p-6">
             <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">

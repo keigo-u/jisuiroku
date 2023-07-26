@@ -4,16 +4,19 @@ import { Book } from "../../types/Book";
 import { Link } from "react-router-dom";
 import { ReturnButton } from "./ReturenButton";
 import { AddButton } from "./AddButton";
+import { Helmet } from "react-helmet-async";
 
 type stateParams  = {
     state: { book: Book }
 }
 
 const BookTopPage: React.FC = () => {
+    const componentName = '詳細'
     const { state: { book } }: stateParams = useLocation()
 
     return (
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <ReturnButton />
         <div className="flex flex-col items-center justify-center rounded-lg shadow-lg bg-beige mx-auto my-5 w-[32rem] h-[32rem]">
             <div className="text-2xl font-bold m-5">{book.title}</div>

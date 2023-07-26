@@ -4,52 +4,37 @@ import { Book } from "../../types/Book";
 import Card from "./Card";
 import FormModal from "./FormModal";
 import EditModal from "./EditModal";
-import { useFavorites, useGetFavorites } from "../../queries/FavoriteQuery";
+import { useGetFavorites } from "../../queries/FavoriteQuery";
 import ShareCard from "../share/ShareCard";
 import { IconPencilPlus } from "@tabler/icons-react";
+import { Helmet } from "react-helmet-async";
 
 const HomePage: React.FC = () => {
 
+    const componentName = 'ホーム'
     const { data:books, status } = useBooks();
-
-    if (status === 'loading') {
-        return(
-            <>
-            <TitleBar />
-            <div className="text-center">読み込み中です。</div>
-            <FormModal />
-            </>
-        )
-    } else if (status === 'error') {
-        return(
-            <>
-            <TitleBar />
-            <div className="text-center">データの読み込みに失敗しました。</div>
-            <FormModal />
-            </>
-        )
-    } else if (!books || books.length <= 0) {
-        return(
-            <>
-            <TitleBar />
-            <div className="text-center">登録されている自炊録はありません</div>
-            <FormModal />
-            </>
-        )
-    }
 
     return(
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <TitleBar />
 
-        <div className="flex flex-wrap">
-            { books.map((book: Book) => (
-                <div key={book.id}>
-                    <Card book={book} />
-                    <EditModal book={book}/>
-                </div>
-            ))}
-        </div>
+        {status === 'loading' ? (
+            <div className="text-center">読み込み中です。</div>
+        ) : status === 'error' ? (
+            <div className="text-center">データの読み込みに失敗しました。</div>
+        ) : !books || books.length <= 0 ? (
+            <div className="text-center">登録されている自炊録はありません</div>
+        ) : (
+            <div className="flex flex-wrap">
+                { books.map((book: Book) => (
+                    <div key={book.id}>
+                        <Card book={book} />
+                        <EditModal book={book}/>
+                    </div>
+                ))}
+            </div>
+        )}
 
         <FavoriteField />
 
@@ -77,50 +62,26 @@ const FavoriteField = () => {
 
     const { data:favorites, status:favo_status } = useGetFavorites();
 
-    if (favo_status === 'loading') {
-        return(
-            <>
-            <div className="flex">
-                <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">お気に入り</div>
-            </div>
-            <div className="text-center">読み込み中です。</div>
-            <FormModal />
-            </>
-        )
-    } else if (favo_status === 'error') {
-        return(
-            <>
-            <div className="flex">
-                <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">お気に入り</div>
-            </div>
-            <div className="text-center">データの読み込みに失敗しました。</div>
-            <FormModal />
-            </>
-        )
-    } else if (!favorites || favorites.length <= 0) {
-        return(
-            <>
-            <div className="flex">
-                <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">お気に入り</div>
-            </div>
-            <div className="text-center">お気に入り登録されている自炊録はありません</div>
-            <FormModal />
-            </>
-        )
-    }
-
     return (
         <>
         <div className="flex">
             <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">お気に入り</div>
         </div>
-        <div className="flex flex-wrap">
-            { favorites.map((book: Book) => (
-                <div key={book.id}>
-                    <ShareCard book={book} />
-                </div>
-            ))}
-        </div>
+        {favo_status === 'loading' ? (
+            <div className="text-center">読み込み中です。</div>
+        ) : favo_status === 'error' ? (
+            <div className="text-center">データの読み込みに失敗しました。</div>
+        ) : !favorites || favorites.length <= 0 ? (
+            <div className="text-center">お気に入り登録されている自炊録はありません</div>
+        ) : (
+            <div className="flex flex-wrap">
+                { favorites.map((book: Book) => (
+                    <div key={book.id}>
+                        <ShareCard book={book} />
+                    </div>
+                ))}
+            </div>
+        )}
         </>
     )
 }

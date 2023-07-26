@@ -1,9 +1,11 @@
 import React, { FormEvent, useState } from "react";
 import { Contact } from "../../types/Contact";
 import { useContact } from "../../queries/ContactQuery";
+import { Helmet } from "react-helmet-async";
 
 const ContactPage = () => {
 
+    const componentName = 'お問い合わせ'
     const contact = useContact()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -24,6 +26,7 @@ const ContactPage = () => {
 
     return (
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <div className="flex">
             <div className="text-2xl m-5 px-12 py-2 bg-brown drop-shadow-md rounded">お問い合わせ</div>
         </div>

@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { Book } from "../../types/Book"
 import { IconNotes, IconPencilPlus } from "@tabler/icons-react"
 import { AlertModal } from "../home/AlertModal"
+import { Helmet } from "react-helmet-async"
 
 type stateParams  = {
     state: { book: Book, record: Record }
@@ -13,6 +14,7 @@ type stateParams  = {
 
 export const EditRecordPage: React.FC = () => {
 
+    const componentName = '更新する'
     const { state: { book, record } }: stateParams = useLocation()
     const navigate = useNavigate()
     const updateRecord = useUpdateRecord()
@@ -86,6 +88,7 @@ export const EditRecordPage: React.FC = () => {
 
     return (
         <>
+        <Helmet><title>{componentName}</title></Helmet>
         <ReturnButton />
         <div className="flex flex-col items-center justify-center rounded-lg shadow-lg bg-beige mx-auto md:my-5 w-[32rem]">
             <div className="font-bold text-2xl mt-5">更新する</div>

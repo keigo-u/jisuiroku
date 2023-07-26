@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from "./hooks/AuthContext";
+import { HelmetProvider } from 'react-helmet-async'
 
 const App: React.FC = () => {
     const queryClient = new QueryClient({
@@ -19,10 +20,12 @@ const App: React.FC = () => {
 
     return (
         <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-        <Router />
-        <ToastContainer hideProgressBar={true} />
-        </QueryClientProvider>
+            <QueryClientProvider client={queryClient}>
+                <HelmetProvider>
+                    <Router />
+                    <ToastContainer hideProgressBar={true} />
+                </HelmetProvider>
+            </QueryClientProvider>
         </AuthProvider>
     );
 };

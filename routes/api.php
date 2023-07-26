@@ -5,6 +5,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,11 +37,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/{record}', 'destroy')->name('record.destroy');
     });
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-
-    Route::patch('/user', [LoginController::class, 'update'])->name('user.update');
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::patch('/user', [UserController::class, 'update'])->name('user.update');
+    Route::patch('/user/icon', [UserController::class, 'updata_icon'])->name('user.update-icon');
 
     Route::apiResource('/favorites', FavoriteController::class)->except(['show', 'update']);
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');

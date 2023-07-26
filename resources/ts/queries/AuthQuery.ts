@@ -20,6 +20,18 @@ const useUpdateUser = () => {
     })
 }
 
+const useUpdateUserIcon = () => {
+    const queryClient = useQueryClient()
+    return useMutation(api.updateUserIcon, {
+        onSuccess: () => {
+            toast.success('更新に成功しました。')
+        },
+        onError: () => {
+            toast.error('更新に失敗しました。')
+        }
+    })
+}
+
 const useRegister = () => {
     const { setIsAuth } = useAuth()
     return useMutation(api.register, {
@@ -75,6 +87,7 @@ const useLogout = () => {
 export {
     useUser,
     useUpdateUser,
+    useUpdateUserIcon,
     useRegister,
     useLogin,
     useLogout,
