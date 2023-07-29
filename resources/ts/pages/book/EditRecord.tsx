@@ -139,7 +139,7 @@ export const EditRecordPage: React.FC = () => {
                 更新する
             </button>
         </div>
-        <div className="flex items-center justify-center m-2">
+        <div className="flex items-center justify-center m-2 mb-5">
             <button data-hs-overlay={`#alert-${record.id!}-modal`}>削除する</button> 
         </div>
         <AlertModal id={record.id!} handle={handleDelete} />

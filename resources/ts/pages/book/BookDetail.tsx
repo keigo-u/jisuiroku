@@ -96,7 +96,7 @@ export const BookDetailPage: React.FC = () => {
             </div>
         </div>
 
-        <div className='flex justify-end'>
+        <div className='flex justify-end mb-5'>
             {user && user.name! == book.created_by && 
             <div className='flex'>
                 <Link to={'/book/detail/edit'} state={{ book: book, record: record }} className='bg-green-200 hover:bg-green-300 rounded-lg shadow-lg ml-auto mr-3 p-5 flex'>

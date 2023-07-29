@@ -31,7 +31,7 @@ const BookTopPage: React.FC = () => {
             </div>
         </div>
         <div className="flex justify-center items-center">
-            <Link to={`detail`} state={{book: book}} className="flex justify-center m-5 py-1 px-10 rounded-lg shadow-md bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">開く</Link>
+            <Link to={`detail`} state={{book: book}} className="flex justify-center mx-5 my-2 py-1 px-10 rounded-lg shadow-md bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">開く</Link>
         </div>
         <AddButton book={book} />
         </>
