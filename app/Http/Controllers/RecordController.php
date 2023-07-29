@@ -47,7 +47,6 @@ class RecordController extends Controller
 
         // リクエストからデータを取り出す
         $data = $request->all();
-        return response()->json($data, 500);
         $input = json_decode($data['record'], true);
 
         // バリデーションチェック
@@ -71,6 +70,7 @@ class RecordController extends Controller
                 $image_url = Cloudinary::upload($input_image->getRealPath())->getSecurePath();
                 $image = new Image();
                 $image->path = $image_url;
+                $image->public_id = Cloudinary::getPublicId();
                 $image->record_id = $record->id;
                 $image->save();
             }
@@ -114,6 +114,7 @@ class RecordController extends Controller
                 $image_url = Cloudinary::upload($input_image->getRealPath())->getSecurePath();
                 $image = new Image();
                 $image->path = $image_url;
+                $image->public_id = Cloudinary::getPublicId();
                 $image->record_id = $record->id;
                 $image->save();
             }
@@ -130,6 +131,11 @@ class RecordController extends Controller
      */
     public function destroy(Book $book, Record $record) : JsonResponse
     {
+        foreach($record->images as $image) {
+            $public_id = $image->public_id;
+            Cloudinary::destroy($public_id);
+        }
+
         return $record->delete() ? response()->json($record) : response()->json([], 500);
     }
 }
