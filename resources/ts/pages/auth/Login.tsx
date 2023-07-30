@@ -7,8 +7,8 @@ const LoginPage = () => {
     const componentName = 'ログイン'
     const login = useLogin()
     const getOAuthUrl = useGetOAuthUrl()
-    const [email, setEmail] = useState('test@test.com')
-    const [password, setPassword] = useState('password123')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
