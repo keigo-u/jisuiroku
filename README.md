@@ -1,66 +1,146 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Jisui6
+<img src=https://res.cloudinary.com/dlqup7j3n/image/upload/v1690712178/screencapture-jisui6-700305e97f73-herokuapp-2023-07-30-19_15_46_mhbcxr.png>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
+毎日の自炊を記録、共有するアプリケーションです。作った料理の画像をアップロードして管理でき、その時の料理一つひとつにレシピや参考にしたリンク、食材などのメモを取ることができます。他の人の投稿を見ることができます。
 
-## About Laravel
+## 制作背景
+大学生になり、一人暮らしをしていて毎日自炊をしていると、過去に作った料理をもう一度作りたいと思うことがありました。毎日の自炊を記録に残すことでレシピを思い出したり、記録に残すための楽しく料理を作ることができると考えました。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## URL
+https://jisui6-700305e97f73.herokuapp.com/
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 使い方
+アカウント作成後、自炊録を作成し、毎日の料理を記録する。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 使用技術
+### フロントエンド
+- React 18
+- react-query 4.29.1
+- react-router 6.10.0
+- react-toastify 9.1.2
+- react-helmet-async
+- swiper 9.2.3
+- query-string
+- axios 1.1.2
+- tailwind 3.3.1
+- preline 1.7.0
+- tabler-icon
 
-## Learning Laravel
+### バックエンド
+- Lravel 10
+- Laravel Sail 1.18
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### デプロイ
+- Heroku
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 外部API
+- Cloudinary
+- Google OAuth
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ER図
+```mermaid
+erDiagram
 
-## Laravel Sponsors
+users ||--o{ books : ""
+books ||--|{ records : ""
+records ||--|{ recipes : ""
+records ||--|{ images : ""
+users ||--o{ favorites : ""
+books ||--o{ favorites : ""
+users ||--o{ identify_providers : ""
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+users {
+    int id PK
+    string name
+    string email
+    string password
+    string icon_path
+}
 
-### Premium Partners
+books {
+    int id PK
+    string title
+    string description
+    date created_at
+    date updated_at
+    boolean is_private
+    int book_cover_id FK
+    int user_id FK
+}
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+records {
+    int id PK
+    int book_id FK
+		date recorded_at
+    date created_at
+    date updated_at
+}
 
-## Contributing
+recipes {
+    int id PK
+		string name
+    string detail
+    int record_id FK
+}
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+images {
+    int id PK
+    string path
+		string public_id
+    int record_id FK
+}
 
-## Code of Conduct
+favorites {
+    int user_id FK
+    int book_id FK
+}
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+contacts {
+    int id PK
+    string name
+    string email
+    string body
+}
 
-## Security Vulnerabilities
+identify_providers {
+		int user_id FK
+		string provider_name
+		int provider_user_id 
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## URL設計
+### API側
+|内容|メソッド|URL|認証|
+|:--|:--|:--|:--:|
+|ユーザーのBook一覧|GET|/api/books|◯|
+|公開されているBook一覧|GET|/api/books/all|◯|
+|Book作成|POST|/api/books|◯|
+|Book更新|PATCH|/api/books/{book}|◯|
+|Book削除|DELETE|/api/books/{book}|◯|
+|Record作成|POST|/api/books/{book}|◯|
+|Record更新|PATCH|/api/books/{book}/{record}|◯|
+|Record削除|DELETE|/api/books/{book}/{record}|◯|
+|お気に入り一覧|GET|/api/favorites|◯|
+|お気に入り登録|POST|/api/favorites|◯|
+|お気に入り解除|POST|/api/favorites/{book}|◯|
+|ユーザー登録|POST|/api/register||
+|ログイン|POST|/api/login||
+|ログアウト|POST|api/logout||
+|OAuthURLの取得|GET|/api/login/{provider}||
+|OAuthログイン|POST|/api/login/{provider}/callback||
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### フロントエンド側
+|内容|URL|認証|
+|:--|:--|:--:|
+|TOP|/|✗|
+|ログイン|/login|✗|
+|ユーザー登録|/register|✗|
+|ホーム|/home|◯|
+|公開|/share|◯|
+|自炊録詳細|/book|◯|
+|記録確認|/book/detail|◯|
+|アカウント設定|/mypage|◯|
+|お問い合わせ|/contact|◯|
+|ログアウト|/logout|◯|
