@@ -65,6 +65,7 @@ const useLogin = () => {
             }
         },
         onError: (error: AxiosError) => {
+            console.log(error)
             toast.error('ログインに失敗しました。')
         }
     })
