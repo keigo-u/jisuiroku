@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [LoginController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider']);
+Route::post('login/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
 
 Route::middleware('auth:sanctum')->group(function() {
 

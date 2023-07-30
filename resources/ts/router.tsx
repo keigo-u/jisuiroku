@@ -17,6 +17,7 @@ import BookTopPage from "./pages/book/BookTop";
 import { BookDetailPage } from "./pages/book/BookDetail";
 import { CreateRecordPage } from "./pages/book/CreateRecord";
 import { EditRecordPage } from "./pages/book/EditRecord";
+import { CallbackPage } from "./pages/auth/Callback";
 
 type Props = {
     component: ReactNode
@@ -57,6 +58,7 @@ const Router = () => {
                     <Route path={`/usage`} element={<LoginRoute component={<UsagePage />} />} />
                     <Route path={`/login`} element={<LoginRoute component={<LoginPage />} />} />
                     <Route path={`/register`} element={<LoginRoute component={<RegisterPage />} />} />
+                    <Route path={`/login/:provider/callback`} element={<LoginRoute component={<CallbackPage />} />} />
 
                     <Route path={`/home`} element={<GuardRoute component={<HomePage />} />} /> 
                     <Route path={`/book`} element={<GuardRoute component={<BookTopPage />} />} /> 

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'icon_path',
     ];
 
     /**
@@ -57,5 +58,10 @@ class User extends Authenticatable
     public function covers() : BelongsToMany
     {
         return $this->belongsToMany(Cover::class);
+    }
+
+    public function identifyProviders() : HasMany
+    {
+        return $this->hasMany(IdentifyProvider::class);
     }
 }

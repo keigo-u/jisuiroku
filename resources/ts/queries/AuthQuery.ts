@@ -84,6 +84,32 @@ const useLogout = () => {
     })
 }
 
+const useGetOAuthUrl = () => {
+    return useMutation(api.getOAuthUrl, {
+        onSuccess: (redirectUrl) => {
+            // console.log(redirectUrl)
+            window.location.href = redirectUrl;
+        },
+        onError: (error: AxiosError) => {
+            toast.error('リダイレクトURLの取得に失敗しました。')
+        }
+    })
+}
+
+const useSocialLogin = () => {
+    const { setIsAuth } = useAuth()
+    return useMutation(api.socialLogin, {
+        onSuccess: (user) => {
+            if (user) {
+                setIsAuth(true)
+            }
+        },
+        onError: (error: AxiosError) => {
+            toast.error('ソーシャルログインに失敗しました。')
+        }
+    })
+}
+
 export {
     useUser,
     useUpdateUser,
@@ -91,4 +117,6 @@ export {
     useRegister,
     useLogin,
     useLogout,
+    useGetOAuthUrl,
+    useSocialLogin
 }

@@ -32,6 +32,16 @@ const logout = async () => {
     return data
 }
 
+const getOAuthUrl = async ({ provider }: { provider: string}) => {
+    const { data } = await axios.get(`/api/login/${provider}`)
+    return data
+}
+
+const socialLogin = async ({ provider, authParams }: { provider: string, authParams }) => {
+    const { data } = await axios.post(`/api/login/${provider}/callback`, authParams)
+    return data
+}
+
 export {
     getUser,
     updateUser,
@@ -39,4 +49,6 @@ export {
     register,
     login,
     logout,
+    getOAuthUrl,
+    socialLogin
 }
